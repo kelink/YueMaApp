@@ -1,0 +1,1 @@
+---ALl Copy Rights Are own By Link---
