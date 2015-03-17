@@ -1,22 +1,27 @@
 package com.gdufs.yuema;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.app.FragmentTabHost;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+
+import com.gdufs.gd.yuema.baseui.FragmentPage1;
+import com.gdufs.gd.yuema.baseui.FragmentPage2;
+import com.gdufs.gd.yuema.baseui.FragmentPage3;
+import com.gdufs.gd.yuema.baseui.FragmentPage4;
+import com.gdufs.gd.yuema.baseui.FragmentPage5;
 
 public class MainActivity extends ActionBarActivity
 		implements
@@ -46,8 +51,10 @@ public class MainActivity extends ActionBarActivity
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+		initView();
 	}
 
+	// 導航欄選擇的時候處理
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
@@ -58,6 +65,7 @@ public class MainActivity extends ActionBarActivity
 						PlaceholderFragment.newInstance(position + 1)).commit();
 	}
 
+	// 設置title
 	public void onSectionAttached(int number) {
 		switch (number) {
 			case 1 :
@@ -79,6 +87,7 @@ public class MainActivity extends ActionBarActivity
 		actionBar.setTitle(mTitle);
 	}
 
+	// 點擊菜單
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -92,6 +101,7 @@ public class MainActivity extends ActionBarActivity
 		return super.onCreateOptionsMenu(menu);
 	}
 
+	// 菜單item選擇
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -103,7 +113,69 @@ public class MainActivity extends ActionBarActivity
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	/**************************************************************************************/
+	/**
+	 * 實現底部的tab欄目
+	 */
+	// 定义FragmentTabHost对象
+	private FragmentTabHost mTabHost;
 
+	// 定义一个布局
+	private LayoutInflater layoutInflater;
+
+	// 定义数组来存放Fragment界面
+	private Class<?> fragmentArray[] = {FragmentPage1.class,
+			FragmentPage2.class, FragmentPage3.class, FragmentPage4.class,
+			FragmentPage5.class};
+
+	// 定义数组来存放按钮图片
+	private int mImageViewArray[] = {R.drawable.tab_home_btn,
+			R.drawable.tab_message_btn, R.drawable.tab_selfinfo_btn,
+			R.drawable.tab_square_btn, R.drawable.tab_more_btn};
+
+	// Tab选项卡的文字
+	private String mTextviewArray[] = {"首页", "消息", "好友", "广场", "更多"};
+
+	/**
+	 * 初始化组件
+	 */
+	private void initView() {
+		// 实例化布局对象
+		layoutInflater = LayoutInflater.from(this);
+
+		// 实例化TabHost对象，得到TabHost
+		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
+		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
+
+		// 得到fragment的个数
+		int count = fragmentArray.length;
+
+		for (int i = 0; i < count; i++) {
+			// 为每一个Tab按钮设置图标、文字和内容
+			TabSpec tabSpec = mTabHost.newTabSpec(mTextviewArray[i])
+					.setIndicator(getTabItemView(i));
+			// 将Tab按钮添加进Tab选项卡中
+			mTabHost.addTab(tabSpec, fragmentArray[i], null);
+			// 设置Tab按钮的背景
+			mTabHost.getTabWidget().getChildAt(i)
+					.setBackgroundResource(R.drawable.selector_tab_background);
+		}
+	}
+	/**
+	 * 给Tab按钮设置图标和文字
+	 */
+	private View getTabItemView(int index) {
+		View view = layoutInflater.inflate(R.layout.tab_item_view, null);
+
+		ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
+		imageView.setImageResource(mImageViewArray[index]);
+
+		TextView textView = (TextView) view.findViewById(R.id.textview);
+		textView.setText(mTextviewArray[index]);
+
+		return view;
+	}
+	/*************************************************************************/
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
