@@ -3,7 +3,6 @@ package com.gdufs.yuema;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -23,9 +22,8 @@ import com.gdufs.gd.yuema.baseui.FragmentPage3;
 import com.gdufs.gd.yuema.baseui.FragmentPage4;
 import com.gdufs.gd.yuema.baseui.FragmentPage5;
 
-public class MainActivity extends ActionBarActivity
-		implements
-			NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends ActionBarActivity implements
+		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -58,25 +56,25 @@ public class MainActivity extends ActionBarActivity
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager
-				.beginTransaction()
-				.replace(R.id.container,
-						PlaceholderFragment.newInstance(position + 1)).commit();
+		// FragmentManager fragmentManager = getSupportFragmentManager();
+		// fragmentManager
+		// .beginTransaction()
+		// .replace(R.id.container,
+		// PlaceholderFragment.newInstance(position + 1)).commit();
 	}
 
 	// 設置title
 	public void onSectionAttached(int number) {
 		switch (number) {
-			case 1 :
-				mTitle = getString(R.string.title_section1);
-				break;
-			case 2 :
-				mTitle = getString(R.string.title_section2);
-				break;
-			case 3 :
-				mTitle = getString(R.string.title_section3);
-				break;
+		case 1:
+			mTitle = getString(R.string.title_section1);
+			break;
+		case 2:
+			mTitle = getString(R.string.title_section2);
+			break;
+		case 3:
+			mTitle = getString(R.string.title_section3);
+			break;
 		}
 	}
 
@@ -113,6 +111,7 @@ public class MainActivity extends ActionBarActivity
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	/**************************************************************************************/
 	/**
 	 * 實現底部的tab欄目
@@ -124,17 +123,17 @@ public class MainActivity extends ActionBarActivity
 	private LayoutInflater layoutInflater;
 
 	// 定义数组来存放Fragment界面
-	private Class<?> fragmentArray[] = {FragmentPage1.class,
+	private Class<?> fragmentArray[] = { FragmentPage1.class,
 			FragmentPage2.class, FragmentPage3.class, FragmentPage4.class,
-			FragmentPage5.class};
+			FragmentPage5.class };
 
 	// 定义数组来存放按钮图片
-	private int mImageViewArray[] = {R.drawable.tab_home_btn,
+	private int mImageViewArray[] = { R.drawable.tab_home_btn,
 			R.drawable.tab_message_btn, R.drawable.tab_selfinfo_btn,
-			R.drawable.tab_square_btn, R.drawable.tab_more_btn};
+			R.drawable.tab_square_btn, R.drawable.tab_more_btn };
 
 	// Tab选项卡的文字
-	private String mTextviewArray[] = {"首页", "消息", "好友", "广场", "更多"};
+	private String mTextviewArray[] = { "首页", "消息", "好友", "广场", "更多" };
 
 	/**
 	 * 初始化组件
@@ -161,6 +160,7 @@ public class MainActivity extends ActionBarActivity
 					.setBackgroundResource(R.drawable.selector_tab_background);
 		}
 	}
+
 	/**
 	 * 给Tab按钮设置图标和文字
 	 */
@@ -175,6 +175,7 @@ public class MainActivity extends ActionBarActivity
 
 		return view;
 	}
+
 	/*************************************************************************/
 	/**
 	 * A placeholder fragment containing a simple view.
