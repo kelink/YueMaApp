@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    >
+
+    <!-- Framgent1 ListView 的样式 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/peopleface"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView1"
+            android:weightSum="3"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/editText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" 
+                android:text="Bonus Marks" >               
+            </EditText>
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2015-01-01 12:00:43" 
+                 android:layout_weight="1" >             
+            </EditText>
+            
+
+        </LinearLayout>
+
+    </RelativeLayout>
+    <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="Activity images"
+            android:src="@drawable/activity" />
+       <TextView
+             android:id="@+id/title"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Android开发常见问题-8" />
+
+       <TextView
+           android:id="@+id/content"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="随着各种大屏幕的安卓机器的出现，适配问题的重要性越来越明显，这里我给大家介绍一下如何使得两个按钮各占屏幕的一半，同理也可以让3个、4个甚至更多的按钮或者其他控件来实现平均占有屏幕的宽度" />
+
+       <View    
+        android:layout_height="1px"   
+        android:background="#ff0000"   
+        android:layout_width="fill_parent">  
+		</View>  
+       
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:paddingTop="2dp" >
+
+           <ImageView
+               android:id="@+id/joiner1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/joiner1" />
+           <ImageView
+               android:id="@+id/joiner2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/joiner2" />
+           <ImageView
+               android:id="@+id/joiner3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/joiner3" />
+           <ImageView
+               android:id="@+id/joiner4"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/joiner4" />
+           <ImageView
+               android:id="@+id/joiner5"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/joiner5" />
+
+           <TextView
+               android:id="@+id/joinerInfo"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:layout_gravity="bottom"
+               android:text="他们也参与了这个活动" />
+
+       </LinearLayout>
+   
+</LinearLayout>

@@ -22,8 +22,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.gdufs.yuema.R;
-
 /**
  * Fragment used for managing interactions for and presentation of a navigation
  * drawer. See the <a href=
@@ -94,6 +92,7 @@ public class NavigationDrawerFragment extends Fragment {
 		setHasOptionsMenu(true);
 	}
 
+	// 导航栏的createView方法
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -109,10 +108,10 @@ public class NavigationDrawerFragment extends Fragment {
 				});
 		mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar()
 				.getThemedContext(), android.R.layout.simple_list_item_1,
-				android.R.id.text1, new String[]{
+				android.R.id.text1, new String[] {
 						getString(R.string.title_section1),
 						getString(R.string.title_section2),
-						getString(R.string.title_section3),}));
+						getString(R.string.title_section3), }));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}
@@ -267,6 +266,7 @@ public class NavigationDrawerFragment extends Fragment {
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
+	// 点击
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {

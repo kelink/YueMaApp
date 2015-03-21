@@ -2,9 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gdufs.yuema.MainActivity" >
-
+    
     <item
         android:id="@+id/action_example"
+        android:title="@string/action_example"
+        app:showAsAction="withText|ifRoom"/>
+     <item
+        android:id="@+id/action_example2"
+        android:icon="@drawable/bg_search"
         android:title="@string/action_example"
         app:showAsAction="withText|ifRoom"/>
     <item
@@ -13,4 +18,5 @@
         android:title="@string/action_settings"
         app:showAsAction="never"/>
 
+   
 </menu>

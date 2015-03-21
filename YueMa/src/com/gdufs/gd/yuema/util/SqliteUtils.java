@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * SqliteUtils
+ * SqliteUtils 单例模式，如果不存在则创建，会自动加载创建数据表
  * 
- * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2013-10-21
+ * @author Administrator
+ * 
  */
+
 public class SqliteUtils {
 
 	private static volatile SqliteUtils instance;

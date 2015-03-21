@@ -4,7 +4,6 @@ public class DBConstants {
 
 	public static final String DB_NAME = "YueMa.db";
 	public static final int DB_VERSION = 1;
-	private static final String TERMINATOR = ";";
 
 	public static final StringBuffer CREATE_CONTACTS_TABLE_SQL = new StringBuffer();
 	public static final String CONTACTS_TABLE_NAME = "Contacts";

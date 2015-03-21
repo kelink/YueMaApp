@@ -1,10 +1,16 @@
 package com.gdufs.gd.yuema.entity;
 
-public class Contact extends BaseEntity {
+import com.gdufs.gd.yuema.base.BaseModel;
+
+public class Contact extends BaseModel {
 	private static final long serialVersionUID = 82570650783060379L;
 	private int id;
 	private String hostNumber;
 	private String friendNumber;
+
+	public static final String CONTACTS_TABLE_ID = "id";
+	public static final String CONTACTS_TABLE_HOSTNUMBER = "hostNumber";
+	public static final String CONTACTS_TABLE_FRIENDNUMBER = "friendNumber";
 
 	public int getId() {
 		return id;

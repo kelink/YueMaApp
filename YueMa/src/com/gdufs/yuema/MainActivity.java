@@ -3,6 +3,7 @@ package com.gdufs.yuema;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gdufs.gd.yuema.baseui.FragmentPage1;
 import com.gdufs.gd.yuema.baseui.FragmentPage2;
@@ -56,11 +58,13 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
-		// FragmentManager fragmentManager = getSupportFragmentManager();
-		// fragmentManager
-		// .beginTransaction()
-		// .replace(R.id.container,
-		// PlaceholderFragment.newInstance(position + 1)).commit();
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager
+				.beginTransaction()
+				.replace(R.id.container,
+						PlaceholderFragment.newInstance(position + 1)).commit();
+		// startActivity(new Intent(MainActivity.this, VolleyActivity.class));
+		Toast.makeText(MainActivity.this, position + "", 1000).show();
 	}
 
 	// 設置title
@@ -82,10 +86,13 @@ public class MainActivity extends ActionBarActivity implements
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setTitle(mTitle);
+		actionBar.setTitle("首页");
+		// Resources r = getResources();
+		// Drawable myDrawable = r.getDrawable(R.drawable.peopleface);
+		// actionBar.setBackgroundDrawable(myDrawable);
 	}
 
-	// 點擊菜單
+	// 點擊菜單，可以设置actionBar
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (!mNavigationDrawerFragment.isDrawerOpen()) {

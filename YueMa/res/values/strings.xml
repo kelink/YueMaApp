@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">YueMaApp</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="app_name">YueMa</string>
+    <string name="title_section1">设置1</string>
+    <string name="title_section2">设置2</string>
+    <string name="title_section3">设置3</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
+    <string name="action_example">action_example</string>
     <string name="action_settings">Settings</string>
+    
+    
+    <!-- homepage Activity -->
+     <string name="activity_title">首页</string>
+     <string name="action_search">查找</string>
+     <string name="activity_tab_home">首页</string>
+     <string name="activity_tab_renmai">人脉</string>
+     <string name="activity_tab_message">信息</string>
+     <string name="activity_tab_me">我</string>
+     <string name="activity_top_tab1">圈子动态</string>
+     <string name="activity_top_tab2">我的动态</string>
+   
+     <!-- processDialog -->
+     <string name="message">登录中</string>
 
 </resources>

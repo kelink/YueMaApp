@@ -3,6 +3,7 @@ package com.gdufs.yuema;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,29 +14,41 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.gdufs.gd.yuema.util.LocalContactUtil;
 
 public class VolleyActivity extends ActionBarActivity {
-	private static final String URL = "http://www.baidu.com/";
-	private RequestQueue mQueue; //
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_volley);
-		mQueue = Volley.newRequestQueue(getApplicationContext());
-		Button volleyBtn = (Button) this.findViewById(R.id.volleyGet);
-		volleyBtn.setOnClickListener(new OnClickListener() {
+		Button btn = (Button) this.findViewById(R.id.volleyGet);
+		btn.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
-				volleyRequest();
+				// TODO Auto-generated method stub
+				Log.i("contact---->",
+						LocalContactUtil
+								.getLocalcontactList(VolleyActivity.this) + "");
+
 			}
 		});
+		// BaseProgressDialog.show(this, "登录中...", true, null);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	private static final String URL = "http://www.baidu.com/";
+	private RequestQueue mQueue; //
+
 	/**
-	 * 使用volley请求数据
+	 * 使用volley请求数
 	 */
 	private void volleyRequest() {
 		StringRequest request = new StringRequest(Method.GET, URL,
@@ -44,6 +57,7 @@ public class VolleyActivity extends ActionBarActivity {
 					public void onResponse(String response) {
 						Log.i("response---->", response.toString());
 					}
+
 				}, new ErrorListener() {
 
 					@Override

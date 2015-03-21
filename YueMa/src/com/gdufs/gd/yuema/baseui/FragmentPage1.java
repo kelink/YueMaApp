@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,9 +16,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.gdufs.gd.yuema.baseui.PullToRefreshBase.OnRefreshListener;
+import com.gdufs.yuema.VolleyActivity;
 
 public class FragmentPage1 extends Fragment {
 
@@ -52,9 +53,13 @@ public class FragmentPage1 extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view,
 					int position, long id) {
-				String text = mListItems.get(position) + ", index = "
-						+ (position + 1);
-				Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+				// String text = mListItems.get(position) + ", index = "
+				// + (position + 1);
+				// Toast.makeText(getActivity(), text,
+				// Toast.LENGTH_SHORT).show();
+				// 启动VolleyActivity
+				startActivity(new Intent(getActivity(), VolleyActivity.class));
+
 			}
 		});
 
