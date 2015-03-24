@@ -1,4 +1,4 @@
-package com.gdufs.gd.yuema.baseui;
+package com.gdufs.yuema;
 
 import java.util.ArrayList;
 
@@ -16,12 +16,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gdufs.yuema.HomeFragment_1;
-import com.gdufs.yuema.HomeFragment_2;
-import com.gdufs.yuema.MyFragmentPagerAdapter;
-import com.gdufs.yuema.R;
-
-public class FragmentPage3 extends Fragment {
+public class HomeFragment extends Fragment {
 
 	Resources resources;
 	private ViewPager mPager;

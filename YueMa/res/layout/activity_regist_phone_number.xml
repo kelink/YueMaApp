@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:padding="10dip" 
+        android:textColorHint="#AAAAAA"  
+        android:singleLine="true"  
+        android:textSize="15sp" 
+        android:inputType="numberDecimal" 
+        android:hint="@string/phonehint"
+        android:layout_marginTop="20dp"
+       	android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_edittext"  
+        >
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="5dp"
+        android:singleLine="true"  
+        android:textSize="12sp"
+        android:text="@string/phonedetial" />
+  	<Button
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/red"
+        android:text="@string/next_btn_text"
+       	android:layout_marginTop="10dp"
+       	android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColor="@color/white"
+       	android:textSize="15sp"
+     />
+
+  	<LinearLayout
+  	    android:layout_width="match_parent"
+  	    android:layout_height="match_parent" 
+  	    android:gravity="center|bottom"
+  	   >
+
+  		<CheckBox
+  		    android:id="@+id/checkBox1"
+  		    android:layout_width="wrap_content"
+  		    android:layout_height="wrap_content"
+  		     android:textSize="12sp" />
+
+  		<TextView
+  		    android:id="@+id/textView2"
+  		    android:layout_width="wrap_content"
+  		    android:layout_height="wrap_content"
+  		   	android:text="@string/aggrement"
+  		    android:textSize="12sp" />
+
+  	</LinearLayout>
+        
+</LinearLayout>

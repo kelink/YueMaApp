@@ -23,5 +23,33 @@
    
      <!-- processDialog -->
      <string name="message">登录中</string>
+     
+     <!--activity logon register activity  -->
+     <string name="contentdescript">activity picture</string>
+     <string name="logon_btn_text">登陆</string>
+     <string name="register_btn_text">注册</string>
+      
+     <!-- activity register phone number -->
+     <string name="phonehint">请输入大陆手机号码(13位)</string>
+     <string name="phonedetial">手机号注册，更加有利于您的朋友和你联系哟</string>
+     <string name="next_btn_text">下一步</string>
+     <string name="aggrement">我同意《YueMa服务协议》</string>
+     
+     <!-- activity set pwd -->
+     <string name="setpwd_information">请输入验证码，并设定密码和姓名</string>
+     <string name="getcode">获取验证码</string>
+     <string name="code">验证码</string>
+     <string name="pwdhint">密码6&#045;20个字符</string>
+     <string name="name">真实姓名</string>
+     <string name="finish_text">完成</string>
+     
+     <!-- activity logon -->
+     <string name="username">手机号</string>
+     <string name="password">密码</string>
+     <string name="logon">登陆</string>
+     <string name="forget">忘记密码</string>
+     <string name="new_user">新用户</string>
+     
+      
 
 </resources>

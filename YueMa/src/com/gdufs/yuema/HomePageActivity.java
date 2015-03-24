@@ -107,10 +107,8 @@ public class HomePageActivity extends ActionBarActivity {
 	 */
 	private View getTabItemView(int index) {
 		View view = layoutInflater.inflate(R.layout.tab_item_view, null);
-
 		ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
 		imageView.setImageResource(mImageViewArray[index]);
-
 		TextView textView = (TextView) view.findViewById(R.id.textview);
 		textView.setText(mTextviewArray[index]);
 

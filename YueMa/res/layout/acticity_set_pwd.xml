@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="@string/setpwd_information" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+     	android:layout_marginTop="10dp"
+       	android:layout_marginBottom="10dp"
+       	android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:background="@color/white" >
+
+        <EditText
+            android:id="@+id/code_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:ems="13"
+            android:hint="@string/code"
+            android:inputType="numberDecimal"
+            android:padding="10dip"
+            android:singleLine="true"
+            android:textColorHint="#AAAAAA"
+            android:textSize="15sp" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/getcode_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+       		android:layout_marginBottom="5dp"
+            android:background="@color/red"
+            android:text="@string/getcode"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+ 	 <EditText
+            android:id="@+id/pwd_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:ems="20"
+            android:hint="@string/pwdhint"
+            android:inputType="text"
+            android:padding="10dip"
+            android:singleLine="true"
+            android:textColorHint="#AAAAAA"
+            android:layout_marginTop="10dp"
+       		android:layout_marginBottom="10dp"
+       		android:layout_marginLeft="5dp"
+        	android:layout_marginRight="5dp"
+            android:textSize="15sp" >
+            <requestFocus />
+        </EditText>
+        <EditText
+            android:id="@+id/name_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_edittext"
+            android:ems="20"
+            android:hint="@string/name"
+            android:inputType="text"
+            android:padding="10dip"
+            android:singleLine="true"
+            android:textColorHint="#AAAAAA"
+            android:layout_marginTop="10dp"
+       		android:layout_marginBottom="10dp"
+       		android:layout_marginLeft="5dp"
+        	android:layout_marginRight="5dp"
+            android:textSize="15sp" >
+            <requestFocus />
+        </EditText>
+        <Button
+	        android:id="@+id/finish_btn"
+	        android:layout_width="match_parent"
+	        android:layout_height="30dp"
+	        android:background="@color/red"
+	        android:text="@string/finish_text"
+	       	android:layout_marginTop="10dp"
+	       	android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="30dp"
+	        android:layout_marginRight="30dp"
+	        android:textColor="@color/white"
+	       	android:textSize="15sp"
+     />
+</LinearLayout>

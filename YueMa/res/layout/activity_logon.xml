@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/imageView_applogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/applogo" 
+        android:contentDescription="@string/contentdescript"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+         >
+
+        <ImageView
+            android:id="@+id/imageView_username"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/contentdescript"
+            android:src="@drawable/icon_logon_user" />
+
+            <EditText
+	            android:id="@+id/editText_username"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/bg_edittext"
+	            android:ems="20"
+	            android:hint="@string/username"
+	            android:inputType="text"
+	            android:padding="10dip"
+	            android:singleLine="true"
+	            android:textColorHint="#AAAAAA"
+	       		android:layout_marginTop="10dp"
+	       		android:layout_marginBottom="10dp"
+	        	android:layout_marginRight="10dp"
+	            android:textSize="15sp" >
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
+
+       <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+         android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+           <ImageView
+               android:id="@+id/imageView_pwdlock"
+               android:layout_width="30dp"
+               android:layout_height="match_parent"
+               android:contentDescription="@string/contentdescript"
+               android:src="@drawable/icon_pwdlock" />
+
+             <EditText
+	            android:id="@+id/editTex_password"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/bg_edittext"
+	            android:ems="20"
+	            android:hint="@string/password"
+	            android:inputType="textPassword"
+	            android:padding="10dip"
+	            android:singleLine="true"
+	            android:textColorHint="#AAAAAA"
+	            android:layout_marginTop="10dp"
+	       		android:layout_marginBottom="10dp"
+	        	android:layout_marginRight="10dp"
+	            android:textSize="15sp" >
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
+
+      
+      <Button
+        android:id="@+id/btn_logon"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/red"
+        android:text="@string/logon"
+       	android:layout_marginTop="10dp"
+       	android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textColor="@color/white"
+       	android:textSize="15sp"
+     />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp" >
+
+          <TextView
+              android:id="@+id/textView_forget"
+              android:layout_width="79dp"
+              android:layout_height="wrap_content"
+              android:gravity="left"
+              android:layout_marginTop="10dp"
+       		  android:layout_marginBottom="10dp"
+       		  android:textSize="15sp"
+              android:text="@string/forget" />
+
+          <TextView
+              android:id="@+id/textView_newuser"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="right"
+              android:layout_marginTop="10dp"
+       		  android:layout_marginBottom="10dp"
+       		  android:textSize="15sp"
+              android:text="@string/new_user" />
+
+      </LinearLayout>
+
+</LinearLayout>

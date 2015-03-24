@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/white">
+ 	<ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+        android:src="@drawable/firstactivity" 
+        android:contentDescription="@string/contentdescript"/>
+  
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           	android:background="@color/red"
+            android:text="@string/register_btn_text"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+             />
+        
+        <Button
+            android:id="@+id/logon_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           	android:background="@color/red"
+            android:text="@string/logon_btn_text"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+               android:textSize="20sp"
+             />
+
+    </LinearLayout>
+
+   
+
+</LinearLayout>
