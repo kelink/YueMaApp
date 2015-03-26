@@ -16,8 +16,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gdufs.yuema.MyFragmentPagerAdapter;
 import com.gdufs.yuema.R;
+import com.gdufs.yuema.adapter.MyFragmentPagerAdapter;
 
 public class HomePageFragment extends Fragment {
 

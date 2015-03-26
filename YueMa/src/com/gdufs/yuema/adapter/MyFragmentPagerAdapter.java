@@ -1,4 +1,4 @@
-package com.gdufs.yuema;
+package com.gdufs.yuema.adapter;
 
 import java.util.ArrayList;
 

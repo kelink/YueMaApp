@@ -16,8 +16,8 @@ import cn.jpush.android.api.JPushInterface;
 import com.gdufs.gd.yuema.baseview.HomePageFragment;
 import com.gdufs.gd.yuema.baseview.HomePageFragment_FriendList;
 import com.gdufs.gd.yuema.baseview.HomePageFragment_Msg;
-import com.gdufs.gd.yuema.baseview.HomepageFragment_User;
 import com.gdufs.gd.yuema.baseview.HomePageFragment_Send;
+import com.gdufs.gd.yuema.baseview.HomepageFragment_User;
 
 public class HomePageActivity extends ActionBarActivity {
 	@Override
@@ -84,8 +84,8 @@ public class HomePageActivity extends ActionBarActivity {
 
 	// 定义数组来存放Fragment界面
 	private Class<?> fragmentArray[] = { HomePageFragment.class,
-			HomePageFragment_FriendList.class, HomePageFragment_Msg.class, HomepageFragment_User.class,
-			HomePageFragment_Send.class };
+			HomePageFragment_FriendList.class, HomePageFragment_Msg.class,
+			HomepageFragment_User.class, HomePageFragment_Send.class };
 
 	// 定义数组来存放按钮图片
 	private int mImageViewArray[] = { R.drawable.tab_home_btn,
@@ -131,7 +131,6 @@ public class HomePageActivity extends ActionBarActivity {
 		imageView.setImageResource(mImageViewArray[index]);
 		TextView textView = (TextView) view.findViewById(R.id.textview);
 		textView.setText(mTextviewArray[index]);
-
 		return view;
 	}
 
