@@ -10,9 +10,9 @@ import android.os.Bundle;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.gdufs.gd.yuema.baseui.PullToRefreshBase;
-import com.gdufs.gd.yuema.baseui.PullToRefreshScrollView;
-import com.gdufs.gd.yuema.baseui.PullToRefreshBase.OnRefreshListener;
+import com.gdufs.gd.yuema.baseview.PullToRefreshBase;
+import com.gdufs.gd.yuema.baseview.PullToRefreshScrollView;
+import com.gdufs.gd.yuema.baseview.PullToRefreshBase.OnRefreshListener;
 
 public class PullRefreshScrollViewActivity extends Activity {
 

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <com.gdufs.gd.yuema.baseui.PullToRefreshWebView
+    <com.gdufs.gd.yuema.baseview.PullToRefreshWebView
         android:id="@+id/pull_webview"
         android:background="#eeeeee"
         android:layout_width="match_parent"

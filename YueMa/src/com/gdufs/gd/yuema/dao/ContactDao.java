@@ -4,7 +4,7 @@ import android.content.ContentValues;
 
 import com.gdufs.gd.yuema.base.BaseSqlite;
 import com.gdufs.gd.yuema.constant.DBConstants;
-import com.gdufs.gd.yuema.entity.Contact;
+import com.gdufs.gd.yuema.model.Contact;
 import com.gdufs.gd.yuema.util.SqliteUtils;
 
 public class ContactDao extends BaseSqlite {

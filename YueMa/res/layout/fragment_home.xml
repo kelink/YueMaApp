@@ -13,8 +13,10 @@
             android:id="@+id/linearLayout1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dip"
-            android:paddingTop="10dip" >
+            android:paddingBottom="5dip"      
+            android:paddingTop="10dip" 
+            android:paddingLeft="30dip"
+            android:paddingRight="30dip">
 
             <TextView
                 android:id="@+id/tv_tab_1"
@@ -22,7 +24,10 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
                 android:gravity="center"
-                android:text="tab_1"
+                android:background="@drawable/corners_bg_left_red"
+                android:text="@string/activity_friends"
+                android:paddingBottom="5dip"      
+           		android:paddingTop="5dip" 
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -32,25 +37,30 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
                 android:gravity="center"
-                android:text="tab_2"
-                android:textColor="@color/white"
+                android:background="@drawable/corners_bg_right_white"
+                android:text="@string/activity_mine"
+                android:paddingBottom="5dip"      
+           		android:paddingTop="5dip"
+                android:textColor="@color/red"
                 android:textSize="18sp" />
         </LinearLayout>
 
+      
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:orientation="vertical"
-            android:paddingBottom="3dip" >
+            android:paddingBottom="3dip">
 
             <ImageView
                 android:id="@+id/iv_bottom_line"
                 android:layout_width="40dip"
                 android:layout_height="2dip"
                 android:scaleType="matrix"
-                android:src="#fff" />
+                android:src="#CC0000" />
         </LinearLayout>
+      
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

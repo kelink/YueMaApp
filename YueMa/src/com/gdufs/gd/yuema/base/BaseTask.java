@@ -39,7 +39,7 @@
 //		// Log.w("BaseTask", "onComplete");
 //	}
 //
-//	public void onComplete(String httpResult) {
+//	public void onComplete(Object object) {
 //		// Log.w("BaseTask", "onComplete");
 //	}
 //

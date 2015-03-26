@@ -7,7 +7,7 @@ import cn.jpush.android.api.JPushInterface;
 /**
  * For developer startup JPush SDK
  * 
- * Ò»°ã½¨ÒéÔÚ×Ô¶¨Òå Application ÀàÀï³õÊ¼»¯¡£Ò²¿ÉÒÔÔÚÖ÷ Activity Àï¡£
+ * Ò»ï¿½ã½¨ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ Application ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Activity ï¿½ï¡£
  */
 public class JPushApplication extends Application {
 	private static final String TAG = "JPush";
@@ -17,7 +17,7 @@ public class JPushApplication extends Application {
 		Log.d(TAG, "[JPushApplication] onCreate");
 		super.onCreate();
 
-		JPushInterface.setDebugMode(true); // ÉèÖÃ¿ªÆôÈÕÖ¾,·¢²¼Ê±Çë¹Ø±ÕÈÕÖ¾
-		JPushInterface.init(this); // ³õÊ¼»¯ JPush
+		JPushInterface.setDebugMode(true); // ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾,ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ø±ï¿½ï¿½ï¿½Ö¾
+		JPushInterface.init(this); // ï¿½ï¿½Ê¼ï¿½ï¿½ JPush
 	}
 }

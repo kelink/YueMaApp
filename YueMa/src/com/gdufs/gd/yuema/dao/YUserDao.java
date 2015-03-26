@@ -3,7 +3,7 @@ package com.gdufs.gd.yuema.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.gdufs.gd.yuema.entity.User;
+import com.gdufs.gd.yuema.model.User;
 
 public interface YUserDao {
 	public int add(User user);

@@ -8,9 +8,9 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.gdufs.gd.yuema.baseui.PullToRefreshBase;
-import com.gdufs.gd.yuema.baseui.PullToRefreshWebView;
-import com.gdufs.gd.yuema.baseui.PullToRefreshBase.OnRefreshListener;
+import com.gdufs.gd.yuema.baseview.PullToRefreshBase;
+import com.gdufs.gd.yuema.baseview.PullToRefreshWebView;
+import com.gdufs.gd.yuema.baseview.PullToRefreshBase.OnRefreshListener;
 import com.gdufs.yuema.R;
 
 public class PullRefreshWebViewActivity extends Activity {

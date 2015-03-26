@@ -11,12 +11,13 @@ import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.jpush.android.api.JPushInterface;
 
-import com.gdufs.gd.yuema.baseui.FragmentPage1;
-import com.gdufs.gd.yuema.baseui.FragmentPage2;
-import com.gdufs.gd.yuema.baseui.FragmentPage3;
-import com.gdufs.gd.yuema.baseui.FragmentPage4;
-import com.gdufs.gd.yuema.baseui.FragmentPage5;
+import com.gdufs.gd.yuema.baseview.FragmentPage1;
+import com.gdufs.gd.yuema.baseview.FragmentPage2;
+import com.gdufs.gd.yuema.baseview.FragmentPage3;
+import com.gdufs.gd.yuema.baseview.FragmentPage4;
+import com.gdufs.gd.yuema.baseview.FragmentPage5;
 
 public class HomePageActivity extends ActionBarActivity {
 	@Override
@@ -24,6 +25,24 @@ public class HomePageActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_homepage);
 		initView();
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		JPushInterface.onPause(this);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		JPushInterface.onResume(this);
 	}
 
 	// 點擊菜單，可以设置actionBar
@@ -70,11 +89,11 @@ public class HomePageActivity extends ActionBarActivity {
 
 	// 定义数组来存放按钮图片
 	private int mImageViewArray[] = { R.drawable.tab_home_btn,
-			R.drawable.tab_message_btn, R.drawable.tab_selfinfo_btn,
-			R.drawable.tab_square_btn, R.drawable.tab_more_btn };
+			R.drawable.tab_selfinfo_btn, R.drawable.tab_square_btn,
+			R.drawable.tab_message_btn, R.drawable.tab_more_btn };
 
 	// Tab选项卡的文字
-	private String mTextviewArray[] = { "首页", "消息", "好友", "广场", "更多" };
+	private String[] mTextviewArray = new String[5];
 
 	/**
 	 * 初始化组件
@@ -90,6 +109,7 @@ public class HomePageActivity extends ActionBarActivity {
 		// 得到fragment的个数
 		int count = fragmentArray.length;
 
+		mTextviewArray = getResources().getStringArray(R.array.homepage_items);
 		for (int i = 0; i < count; i++) {
 			// 为每一个Tab按钮设置图标、文字和内容
 			TabSpec tabSpec = mTabHost.newTabSpec(mTextviewArray[i])

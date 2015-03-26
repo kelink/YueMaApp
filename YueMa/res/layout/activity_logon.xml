@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    
+    android:gravity="center"
     android:background="@color/white">
 
     <ImageView
@@ -85,7 +85,7 @@
       <Button
         android:id="@+id/btn_logon"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:background="@color/red"
         android:text="@string/logon"
        	android:layout_marginTop="10dp"

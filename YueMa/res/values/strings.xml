@@ -18,8 +18,8 @@
      <string name="activity_tab_renmai">人脉</string>
      <string name="activity_tab_message">信息</string>
      <string name="activity_tab_me">我</string>
-     <string name="activity_top_tab1">圈子动态</string>
-     <string name="activity_top_tab2">我的动态</string>
+     <string name="activity_friends">圈子动态</string>
+     <string name="activity_mine">我的动态</string>
    
      <!-- processDialog -->
      <string name="message">登录中</string>
@@ -50,6 +50,14 @@
      <string name="forget">忘记密码</string>
      <string name="new_user">新用户</string>
      
+     <!-- homepage中下Tab的数组 -->
+  	<string-array name="homepage_items">
+		<item>首页</item>
+		<item>人脉</item>
+		<item>发布</item>
+		<item>消息</item>
+		<item>我</item>
+	</string-array>
       
 
 </resources>

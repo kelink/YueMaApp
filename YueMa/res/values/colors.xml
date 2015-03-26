@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<color name="white">#FFFFFF</color>
-   	<color name="red">#FF594B</color>
+   	<color name="red">#FF4638</color>
+   	<color name="deep_red">#CC0000</color>
    	<color name="blue">#1DB1F5</color>	
    <color name="gray">#F0F0F0</color>	
+  <color name="loading_dialog_bg">#E0E2E1</color>
 </resources>
