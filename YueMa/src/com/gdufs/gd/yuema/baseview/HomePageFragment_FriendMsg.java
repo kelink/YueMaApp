@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedList;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,17 +22,18 @@ import com.gdufs.gd.yuema.baseview.PullToRefreshBase.OnRefreshListener;
 import com.gdufs.yuema.R;
 
 /**
- * 我的动态Fragment
+ * 朋友圈子的动态
  * 
  * @author Administrator
  * 
  */
-public class HomeFragment_mine extends Fragment {
+public class HomePageFragment_FriendMsg extends Fragment {
 
 	private ListView mListView;
 	private PullToRefreshListView mPullListView;
 	private ArrayAdapter<String> mAdapter;
 	private LinkedList<String> mListItems;
+	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 	private boolean mIsStart = true;
 	private int mCurIndex = 0;
@@ -40,9 +42,9 @@ public class HomeFragment_mine extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_home_mine, null);
+		View view = inflater.inflate(R.layout.fragment_home__friends, null);
 		mPullListView = (PullToRefreshListView) view
-				.findViewById(R.id.home_mine_list);
+				.findViewById(R.id.home_friends_list);
 		// 设置属性
 		// 设置加载和滚动
 		mPullListView.setPullLoadEnabled(false);
@@ -197,31 +199,6 @@ public class HomeFragment_mine extends Fragment {
 			"Denhany Dorset Drum", "Derby", "Dessertnyj Belyj", "Devon Blue",
 			"Devon Garland", "Dolcelatte", "Doolin", "Doppelrhamstufel",
 			"Dorset Blue Vinney", "Double Gloucester", "Double Worcester",
-			"Dreux a la Feuille", "Dry Jack", "Duddleswell", "Dunbarra",
-			"Dunlop", "Dunsyre Blue", "Duroblando", "Durrus",
-			"Dutch Mimolette (Commissiekaas)", "Edam", "Edelpilz",
-			"Emental Grand Cru", "Emlett", "Emmental", "Epoisses de Bourgogne",
-			"Esbareich", "Esrom", "Etorki", "Evansdale Farmhouse Brie",
-			"Evora De L'Alentejo", "Exmoor Blue", "Explorateur", "Feta",
-			"Feta (Australian)", "Figue", "Filetta", "Fin-de-Siecle",
-			"Finlandia Swiss", "Finn", "Fiore Sardo", "Fleur du Maquis",
-			"Flor de Guia", "Flower Marie", "Folded",
-			"Folded cheese with mint", "Fondant de Brebis", "Fontainebleau",
-			"Fontal", "Fontina Val d'Aosta", "Formaggio di capra", "Fougerus",
-			"Four Herb Gouda", "Fourme d' Ambert", "Fourme de Haute Loire",
-			"Fourme de Montbrison", "Fresh Jack", "Fresh Mozzarella",
-			"Fresh Ricotta", "Fresh Truffles", "Fribourgeois", "Friesekaas",
-			"Friesian", "Friesla", "Frinault", "Fromage a Raclette",
-			"Fromage Corse", "Fromage de Montagne de Savoie", "Fromage Frais",
-			"Fruit Cream Cheese", "Frying Cheese", "Fynbo", "Gabriel",
-			"Galette du Paludier", "Galette Lyonnaise",
-			"Galloway Goat's Milk Gems", "Gammelost", "Gaperon a l'Ail",
-			"Garrotxa", "Gastanberra", "Geitost", "Gippsland Blue", "Gjetost",
-			"Gloucester", "Golden Cross", "Gorgonzola", "Gornyaltajski",
-			"Gospel Green", "Gouda", "Goutu", "Gowrie", "Grabetto", "Graddost",
-			"Grafton Village Cheddar", "Grana", "Grana Padano", "Grand Vatel",
-			"Grataron d' Areches", "Gratte-Paille", "Graviera", "Greuilh",
-			"Greve", "Gris de Lille", "Gruyere", "Gubbeen", "Guerbigny",
-			"Halloumi", "Halloumy (Australian)", "Haloumi-Style Cheese" };
+			"Dreux a la Feuille", "Dry Jack", "Duddleswell", "Dunbarra" };
 
 }

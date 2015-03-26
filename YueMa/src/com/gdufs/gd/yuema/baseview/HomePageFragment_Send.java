@@ -8,11 +8,17 @@ import android.view.ViewGroup;
 
 import com.gdufs.yuema.R;
 
-public class FragmentPage4 extends Fragment {
+/**
+ * 消息发布
+ * 
+ * @author Administrator
+ * 
+ */
+public class HomePageFragment_Send extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_4, null);
+		return inflater.inflate(R.layout.fragment_5, null);
 	}
 }

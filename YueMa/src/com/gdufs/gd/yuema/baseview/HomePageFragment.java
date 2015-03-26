@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.gdufs.yuema.MyFragmentPagerAdapter;
 import com.gdufs.yuema.R;
 
-public class FragmentPage1 extends Fragment {
+public class HomePageFragment extends Fragment {
 
 	Resources resources;
 	private ViewPager mPager;
@@ -86,8 +86,8 @@ public class FragmentPage1 extends Fragment {
 		mPager = (ViewPager) parentView.findViewById(R.id.vPager);
 		fragmentsList = new ArrayList<Fragment>();
 
-		home1 = new HomeFragment_friends();
-		home2 = new HomeFragment_mine();
+		home1 = new HomePageFragment_FriendMsg();
+		home2 = new HomePageFragment_MyMsg();
 
 		fragmentsList.add(home1);
 		fragmentsList.add(home2);

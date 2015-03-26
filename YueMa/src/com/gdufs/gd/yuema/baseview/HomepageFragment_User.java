@@ -8,11 +8,17 @@ import android.view.ViewGroup;
 
 import com.gdufs.yuema.R;
 
-public class FragmentPage5 extends Fragment {
+/**
+ * 用户界面
+ * 
+ * @author Administrator
+ * 
+ */
+public class HomepageFragment_User extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_5, null);
+		return inflater.inflate(R.layout.fragment_4, null);
 	}
 }

@@ -13,11 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 
-import com.gdufs.gd.yuema.baseview.FragmentPage1;
-import com.gdufs.gd.yuema.baseview.FragmentPage2;
-import com.gdufs.gd.yuema.baseview.FragmentPage3;
-import com.gdufs.gd.yuema.baseview.FragmentPage4;
-import com.gdufs.gd.yuema.baseview.FragmentPage5;
+import com.gdufs.gd.yuema.baseview.HomePageFragment;
+import com.gdufs.gd.yuema.baseview.HomePageFragment_FriendList;
+import com.gdufs.gd.yuema.baseview.HomePageFragment_Msg;
+import com.gdufs.gd.yuema.baseview.HomepageFragment_User;
+import com.gdufs.gd.yuema.baseview.HomePageFragment_Send;
 
 public class HomePageActivity extends ActionBarActivity {
 	@Override
@@ -83,9 +83,9 @@ public class HomePageActivity extends ActionBarActivity {
 	private LayoutInflater layoutInflater;
 
 	// 定义数组来存放Fragment界面
-	private Class<?> fragmentArray[] = { FragmentPage1.class,
-			FragmentPage2.class, FragmentPage3.class, FragmentPage4.class,
-			FragmentPage5.class };
+	private Class<?> fragmentArray[] = { HomePageFragment.class,
+			HomePageFragment_FriendList.class, HomePageFragment_Msg.class, HomepageFragment_User.class,
+			HomePageFragment_Send.class };
 
 	// 定义数组来存放按钮图片
 	private int mImageViewArray[] = { R.drawable.tab_home_btn,

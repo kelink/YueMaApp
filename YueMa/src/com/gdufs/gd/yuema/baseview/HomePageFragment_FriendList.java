@@ -8,7 +8,13 @@ import android.view.ViewGroup;
 
 import com.gdufs.yuema.R;
 
-public class FragmentPage2 extends Fragment {
+/**
+ * 人脉list
+ * 
+ * @author Administrator
+ * 
+ */
+public class HomePageFragment_FriendList extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
