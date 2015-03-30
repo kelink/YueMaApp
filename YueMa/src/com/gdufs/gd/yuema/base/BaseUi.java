@@ -1,14 +1,19 @@
 package com.gdufs.gd.yuema.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import cn.jpush.android.api.JPushInterface;
 import cn.trinea.android.common.util.NetWorkUtils;
@@ -17,11 +22,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.gdufs.gd.yuema.util.AppUtil;
 import com.gdufs.gd.yuema.util.volley.RequestManager;
+import com.gdufs.yuema.R;
 
-public class BaseUi extends Activity {
+public class BaseUi extends ActionBarActivity {
+	private long exitTime = 0;// 标志退出时间
 	protected Handler handler;
 	protected boolean showLoadBar = false;
 	protected boolean showDebugMsg = true;
+	protected Context context;
+	protected ActionBar actionBar;
+	protected ImageView setting;
+	protected TextView title;
 	protected RequestQueue requestQueue = RequestManager.getInstance(this)
 			.getRequestQueue();
 
@@ -29,6 +40,32 @@ public class BaseUi extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context = getApplicationContext();
+		handler = new Handler();
+		actionBar = getSupportActionBar();
+		// 设置全屏下不显示标题栏
+
+	}
+
+	// 判断是否为全屏，是的话不显示标题栏
+	protected void setFullScreenActionBar() {
+		actionBar.setDisplayHomeAsUpEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+	}
+
+	// 设置自定义的actionBar
+	protected void setCustomerActionBar(LayoutInflater layoutInflater,
+			OnClickListener settingListener, String titleString) {
+		View actionBarView = layoutInflater.inflate(
+				R.layout.actionbar_port_layout, null);
+		setting = (ImageView) actionBarView.findViewById(R.id.Setting);
+		setting.setOnClickListener(settingListener);
+		title = (TextView) actionBarView.findViewById(R.id.title);
+		title.setText(titleString);
+		actionBar.setCustomView(actionBarView);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		actionBar.setDisplayShowCustomEnabled(true);
 	}
 
 	@Override
@@ -281,4 +318,22 @@ public class BaseUi extends Activity {
 					tag + ":" + AppUtil.getUsedMemory());
 		}
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 3000) {
+				Toast.makeText(getApplicationContext(), "再按一次退出程序",
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
 }

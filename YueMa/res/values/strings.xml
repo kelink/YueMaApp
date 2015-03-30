@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">YueMa</string>
+	<string name="setting">设置</string>
     <string name="title_section1">设置1</string>
     <string name="title_section2">设置2</string>
     <string name="title_section3">设置3</string>
@@ -58,6 +59,17 @@
 		<item>消息</item>
 		<item>我</item>
 	</string-array>
-      
+     
+  	<!-- activity 活动界面 -->
+  	<string name="title">活动标题</string>
+  	<string name="introduce">活动详情介绍</string>
+  	<string name="add_label">添加活动标签</string>
+  	<string name="begin_time">开始时间</string>
+  	<string name="end_time">结束时间</string>
+  	<string name="max_count">最大人数</string>
+  	<string name="per_cost">预期人均消费</string>
+  	<string name="collection_address">集合地点</string>
+  	<string name="activity_address">活动地点</string>
+  	<string name="contact">联系方式</string>
 
 </resources>

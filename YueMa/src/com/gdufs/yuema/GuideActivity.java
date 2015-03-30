@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.gdufs.gd.yuema.base.BaseUi;
-import com.gdufs.yuema.adapter.ViewPagerAdapter;
+import com.gdufs.yuema.adapter.GuideViewPagerAdapter;
 
 /**
  * 页面引导页
@@ -23,7 +23,7 @@ import com.gdufs.yuema.adapter.ViewPagerAdapter;
 public class GuideActivity extends BaseUi implements OnPageChangeListener {
 
 	private ViewPager vp;
-	private ViewPagerAdapter vpAdapter;
+	private GuideViewPagerAdapter vpAdapter;
 	private List<View> views;
 
 	// 底部小点图片
@@ -36,26 +36,25 @@ public class GuideActivity extends BaseUi implements OnPageChangeListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guide);
-
 		// 初始化页面
 		initViews();
-
 		// 初始化底部小点
 		initDots();
 	}
 
 	private void initViews() {
 		LayoutInflater inflater = LayoutInflater.from(this);
-
-		views = new ArrayList<View>();
+		// 设置ActionBar
+		setFullScreenActionBar();
 		// 初始化引导图片列表
+		views = new ArrayList<View>();
 		views.add(inflater.inflate(R.layout.activity_guide_one, null));
 		views.add(inflater.inflate(R.layout.activity_guide_two, null));
 		views.add(inflater.inflate(R.layout.activity_guide_three, null));
 		views.add(inflater.inflate(R.layout.activity_guide_four, null));
 
 		// 初始化Adapter
-		vpAdapter = new ViewPagerAdapter(views, this);
+		vpAdapter = new GuideViewPagerAdapter(views, this);
 
 		vp = (ViewPager) findViewById(R.id.viewpager);
 		vp.setAdapter(vpAdapter);

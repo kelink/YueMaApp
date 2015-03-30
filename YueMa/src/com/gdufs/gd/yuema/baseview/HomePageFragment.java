@@ -7,13 +7,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gdufs.yuema.R;
@@ -24,13 +21,8 @@ public class HomePageFragment extends Fragment {
 	Resources resources;
 	private ViewPager mPager;
 	private ArrayList<Fragment> fragmentsList;
-	private ImageView ivBottomLine;
 	private TextView tvTabNew, tvTabHot;
-
 	private int currIndex = 0;
-	private int bottomLineWidth;
-	private int offset = 0;
-	private int position_one;
 	public final static int num = 2;
 	Fragment home1;
 	Fragment home2;
@@ -38,24 +30,16 @@ public class HomePageFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		View view = inflater.inflate(R.layout.fragment_home, null);
 		resources = getResources();
-		InitWidth(view);
 		InitTextView(view);
 		InitViewPager(view);
-		TranslateAnimation animation = new TranslateAnimation(position_one,
-				offset, 0, 0);
-		tvTabHot.setTextColor(resources.getColor(R.color.red));
-		animation.setFillAfter(true);
-		animation.setDuration(300);
-		ivBottomLine.startAnimation(animation);
 		return view;
 	}
 
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		mPager.setCurrentItem(currIndex);
 
@@ -63,15 +47,14 @@ public class HomePageFragment extends Fragment {
 
 	@Override
 	public void onStop() {
-		// TODO Auto-generated method stub
 		super.onStop();
-		mPager.setCurrentItem(0);// 设置每次都回到主页的第一页
+		mPager.setCurrentItem(currIndex);
 	}
 
 	@Override
 	public void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
+		mPager.setCurrentItem(currIndex);
 	}
 
 	private void InitTextView(View parentView) {
@@ -95,19 +78,7 @@ public class HomePageFragment extends Fragment {
 		mPager.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager(),
 				fragmentsList));
 		mPager.setOnPageChangeListener(new MyOnPageChangeListener());
-		mPager.setCurrentItem(0);
-
-	}
-
-	private void InitWidth(View parentView) {
-		ivBottomLine = (ImageView) parentView.findViewById(R.id.iv_bottom_line);
-		bottomLineWidth = ivBottomLine.getLayoutParams().width;
-		DisplayMetrics dm = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-		int screenW = dm.widthPixels;
-		offset = (int) ((screenW / num - bottomLineWidth) / 2);
-		int avg = (int) (screenW / num);
-		position_one = avg + offset;
+		mPager.setCurrentItem(currIndex);
 
 	}
 
@@ -128,37 +99,32 @@ public class HomePageFragment extends Fragment {
 
 		@Override
 		public void onPageSelected(int arg0) {
-			Animation animation = null;
 			switch (arg0) {
 			case 0:
-				if (currIndex == 1) {
-					animation = new TranslateAnimation(position_one, offset, 0,
-							0);
-					tvTabHot.setTextColor(resources.getColor(R.color.red));
-					tvTabHot.setBackground(resources
-							.getDrawable(R.drawable.corners_bg_right_white));
-				}
+				// 左边
 				tvTabNew.setTextColor(resources.getColor(R.color.white));
 				tvTabNew.setBackground(resources
 						.getDrawable(R.drawable.corners_bg_left_red));
+				// 右边
+				tvTabHot.setTextColor(resources.getColor(R.color.red));
+				tvTabHot.setBackground(resources
+						.getDrawable(R.drawable.corners_bg_right_white));
 				break;
 			case 1:
-				if (currIndex == 0) {
-					animation = new TranslateAnimation(offset, position_one, 0,
-							0);
-					tvTabHot.setTextColor(resources.getColor(R.color.white));
-					tvTabHot.setBackground(resources
-							.getDrawable(R.drawable.corners_bg_right_red));
-				}
 				tvTabNew.setTextColor(resources.getColor(R.color.red));
 				tvTabNew.setBackground(resources
 						.getDrawable(R.drawable.corners_bg_left_white));
+				// 右边
+				tvTabHot.setTextColor(resources.getColor(R.color.white));
+				tvTabHot.setBackground(resources
+						.getDrawable(R.drawable.corners_bg_right_red));
+
 				break;
 			}
+			Log.i("arg0----------->", arg0 + "");
+			Log.i("currIndex----------->", currIndex + "");
+
 			currIndex = arg0;
-			animation.setFillAfter(true);
-			animation.setDuration(300);
-			ivBottomLine.startAnimation(animation);
 		}
 
 		@Override

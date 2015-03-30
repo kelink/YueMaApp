@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
+   <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
@@ -45,22 +45,7 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
-      
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:orientation="vertical"
-            android:paddingBottom="3dip">
 
-            <ImageView
-                android:id="@+id/iv_bottom_line"
-                android:layout_width="40dip"
-                android:layout_height="2dip"
-                android:scaleType="matrix"
-                android:src="#CC0000" />
-        </LinearLayout>
-      
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

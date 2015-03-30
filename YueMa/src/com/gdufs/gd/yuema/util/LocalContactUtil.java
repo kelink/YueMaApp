@@ -53,7 +53,7 @@ public class LocalContactUtil {
 					continue;
 				String contactName = phoneCursor
 						.getString(PHONES_DISPLAY_NAME_INDEX);
-				if (isMobileNO(phoneNumber)) {
+				if (isMobileNum(phoneNumber)) {
 					ContentValues item = new ContentValues();
 					item.put(phoneNumber, contactName);
 					contactList.add(item);
@@ -77,7 +77,7 @@ public class LocalContactUtil {
 					continue;
 				String contactName = phoneCursor
 						.getString(PHONES_DISPLAY_NAME_INDEX);
-				if (isMobileNO(phoneNumber)) {
+				if (isMobileNum(phoneNumber)) {
 					ContentValues item = new ContentValues();
 					item.put(phoneNumber, contactName);
 					contactList.add(item);
@@ -96,7 +96,7 @@ public class LocalContactUtil {
 	 * @return
 	 */
 
-	public static boolean isMobileNO(String mobiles) {
+	public static boolean isMobileNum(String mobiles) {
 		Pattern p = Pattern
 				.compile("^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8]))\\d{8}$");
 		Matcher m = p.matcher(mobiles);

@@ -5,7 +5,28 @@
     android:orientation="vertical"
     android:background="@color/gray" >
 
-   
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" 
+            android:background="@color/red">
+
+            <SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF7D73"
+                android:iconifiedByDefault="true"
+                android:imeOptions="actionSearch"
+                android:inputType="textCapWords"
+                android:queryHint="请输入查找的信息" 
+                android:layout_marginLeft="20dp"
+       			android:layout_marginRight="20dp"   			
+       			android:layout_marginBottom="5dp"
+       			android:layout_marginTop="5dp">
+
+        </SearchView>
+        </LinearLayout>
 
     <LinearLayout
         android:id="@+id/relation_first"

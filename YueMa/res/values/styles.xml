@@ -59,6 +59,39 @@
   </style>
  
   
+      <!-- 自定义ActionBar样式，重设ActionBar背景，隐藏actionbar左侧的应用图标和标题 -->
+    <style name="actionbar_def_style" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <!-- 在样式里面直接替换掉actionbar的背景，避免在有的窗口进入慢时导致进入时显示系统默认的actionbar -->  
+        <item name="android:background">@color/red</item>
+       	<!-- 在样式里面去掉acionbar的应用图标和标题 -->
+        <item name="android:displayOptions">useLogo</item>
+    </style>
+     <!-- 自定义窗口样式，需要带ActionBar -->
+    <style name="ActivityTheme_Light" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/actionbar_def_style</item> 
+    </style>
+  
+  	<!-- actionBarActivity全屏 -->
+    <!-- Your App Theme-->
+	<style name="MyAppTheme.Light" parent="@style/Theme.AppCompat.Light">    
+	</style>
+	
+	<!-- Transparent ActionBar Style -->
+	<style name="MyAppTheme.Light.Light.ActionBar.Transparent" parent="@style/Widget.AppCompat.Light.ActionBar">
+	    <item name="android:background">@android:color/transparent</item>
+	    <item name="background">@android:color/transparent</item>
+	</style>
+	
+	<!-- Fullscreen Activity Theme -->
+	<style name="MyAppTheme.Light.FullScreen.Light" parent="@style/MyAppTheme.Light">
+	    <item name="android:actionBarStyle">@style/MyAppTheme.Light.Light.ActionBar.Transparent</item>
+	    <item name="actionBarStyle">@style/MyAppTheme.Light.Light.ActionBar.Transparent</item>
+	    <item name="android:windowIsTranslucent">true</item>
+	    <item name="android:windowContentOverlay">@null</item>
+	    <item name="android:backgroundDimEnabled">false</item>
+	    <item name="android:windowActionBarOverlay">true</item>
+	    <item name="windowActionBarOverlay">true</item>
+	</style>
  	
  
 </resources>

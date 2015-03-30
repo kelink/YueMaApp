@@ -75,6 +75,8 @@ public class SplashActivity extends BaseUi {
 		} else {
 			mHandler.sendEmptyMessageDelayed(GO_GUIDE, SPLASH_DELAY_MILLIS);
 		}
+		// 设置ActionBar
+		setFullScreenActionBar();
 
 	}
 

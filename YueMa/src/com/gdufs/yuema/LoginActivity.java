@@ -32,6 +32,7 @@ public class LoginActivity extends BaseUi {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_logon);
+		initView();
 		logonBtn = (Button) this.findViewById(R.id.btn_logon);
 		userNameEditText = (EditText) this.findViewById(R.id.editText_username);
 		pwdEditText = (EditText) this.findViewById(R.id.editTex_password);
@@ -50,6 +51,27 @@ public class LoginActivity extends BaseUi {
 				}
 			}
 		});
+		forgetTextView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				forward(ForgetPwdActivity.class);
+			}
+		});
+		newUserTextView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// forward(RegistPhoneActivity.class);
+				// forward(NewActivityActivity.class);
+				forward(BaiduMapActivity.class);
+			}
+		});
+	}
+
+	private void initView() {
+		// 设置ActionBar
+		setFullScreenActionBar();
 	}
 
 	@Override
@@ -58,7 +80,6 @@ public class LoginActivity extends BaseUi {
 	}
 
 	// 登陆逻辑
-
 	private void logOn(String userName, String pwd) {
 		if (NetWorkUtils.getNetWorkType(this).equals(
 				NetWorkUtils.NETWORK_TYPE_DISCONNECT)) {

@@ -6,7 +6,7 @@
     android:background="@color/white">
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/editText_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="13"
@@ -25,7 +25,6 @@
     </EditText>
 
     <TextView
-        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
@@ -35,7 +34,7 @@
         android:textSize="12sp"
         android:text="@string/phonedetial" />
   	<Button
-        android:id="@+id/register_btn"
+        android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="@color/red"

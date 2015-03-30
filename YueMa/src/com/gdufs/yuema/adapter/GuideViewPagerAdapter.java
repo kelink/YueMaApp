@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
-import com.gdufs.yuema.LoginActivity;
+import com.gdufs.yuema.LogonRegistActivity;
 import com.gdufs.yuema.R;
 
 /**
@@ -23,7 +23,7 @@ import com.gdufs.yuema.R;
  * @author Administrator
  * 
  */
-public class ViewPagerAdapter extends PagerAdapter {
+public class GuideViewPagerAdapter extends PagerAdapter {
 
 	// 界面列表
 	private List<View> views;
@@ -31,7 +31,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 	private static final String SHAREDPREFERENCES_NAME = "first_pref";
 
-	public ViewPagerAdapter(List<View> views, Activity activity) {
+	public GuideViewPagerAdapter(List<View> views, Activity activity) {
 		this.views = views;
 		this.activity = activity;
 	}
@@ -79,7 +79,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
 	private void goHome() {
 		// 跳转
-		Intent intent = new Intent(activity, LoginActivity.class);
+		Intent intent = new Intent(activity, LogonRegistActivity.class);
 		activity.startActivity(intent);
 		activity.finish();
 	}

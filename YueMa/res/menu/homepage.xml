@@ -2,6 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gdufs.yuema.TestActivity" >
+    
+     <item
+        android:id="@+id/Setting"
+        android:icon="@drawable/actionbar_leftsize"
+        android:title="@string/setting"
+        app:showAsAction="withText"/>
     <item
         android:id="@+id/search"
         android:icon="@drawable/bg_search"
