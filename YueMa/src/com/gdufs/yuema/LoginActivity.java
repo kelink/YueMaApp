@@ -62,9 +62,7 @@ public class LoginActivity extends BaseUi {
 
 			@Override
 			public void onClick(View v) {
-				// forward(RegistPhoneActivity.class);
-				// forward(NewActivityActivity.class);
-				forward(BaiduMapActivity.class);
+				forward(RegistPhoneActivity.class);
 			}
 		});
 	}

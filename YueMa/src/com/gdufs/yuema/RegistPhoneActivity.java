@@ -1,6 +1,8 @@
 package com.gdufs.yuema;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -49,11 +51,27 @@ public class RegistPhoneActivity extends BaseUi {
 
 	private void initView() {
 		// 设置ActionBar
-		setFullScreenActionBar();
+		setCustomerActionBarNoSetting(this.getLayoutInflater(), null, "注册");
 	}
 
 	// 判断是否符合格式
 	private boolean volidPhoneNum(String phoneNum) {
 		return LocalContactUtil.isMobileNum(phoneNum);
 	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		switch (id) {
+		case android.R.id.home:
+			Intent intent = new Intent(this, LogonRegistActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			return true;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+
 }

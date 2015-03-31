@@ -10,7 +10,8 @@
         android:id="@+id/imageView_applogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/applogo" 
+        android:layout_marginTop="50dp"
+        android:src="@drawable/logo" 
         android:contentDescription="@string/contentdescript"
         android:layout_gravity="center"/>
 

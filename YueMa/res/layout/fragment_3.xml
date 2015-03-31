@@ -3,12 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/xianjian03" >
-    </ImageView>
+    
 
 </LinearLayout>

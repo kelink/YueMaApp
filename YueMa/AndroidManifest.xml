@@ -43,7 +43,7 @@
 	<uses-permission android:name="android.permission.READ_CONTACTS"/> 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/app"
         android:label="@string/app_name"
         android:name="com.gdufs.yuema.application.MainApplication"
         android:theme="@style/AppTheme" >
@@ -153,13 +153,13 @@
        <!-- 注册界面1 phoneNum -->
        <activity
             android:name="com.gdufs.yuema.RegistPhoneActivity"
-            android:theme="@style/MyAppTheme.Light.FullScreen.Light" 
+            android:theme="@style/CustomActionBarTheme" 
             android:label="@string/app_name">      
        </activity>
        <!-- 注册界面2 password -->
         <activity
             android:name="com.gdufs.yuema.RegistPwdActivity"
-            android:theme="@style/MyAppTheme.Light.FullScreen.Light" 
+            android:theme="@style/CustomActionBarTheme" 
             android:label="@string/app_name">   
        </activity>
        <!-- 忘记密码 -->   
@@ -173,7 +173,7 @@
             android:name="com.gdufs.yuema.HomePageActivity"
            	android:theme="@style/CustomActionBarTheme"   
            	 android:label="@string/activity_title"     
-            android:logo="@drawable/logo" >
+            android:logo="@drawable/logo1" >
         </activity>
         
          <!-- 发起活动界面 -->
@@ -181,7 +181,7 @@
             android:name="com.gdufs.yuema.NewActivityActivity"
            	android:theme="@style/CustomActionBarTheme"   
            	 android:label="@string/activity_title"     
-            android:logo="@drawable/logo" >
+            android:logo="@drawable/logo1" >
         </activity>
    
        <!--关系测试界面 -->

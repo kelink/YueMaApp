@@ -122,15 +122,16 @@ public class HomePageActivity extends BaseUi {
 		// 实例化TabHost对象，得到TabHost
 		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
-		super.setCustomerActionBar(layoutInflater, new OnClickListener() {
+		super.setCustomerActionBarWithSetting(layoutInflater,
+				new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(HomePageActivity.this,
-						RelationActivity.class));
+					@Override
+					public void onClick(View v) {
+						startActivity(new Intent(HomePageActivity.this,
+								RelationActivity.class));
 
-			}
-		}, "首页");
+					}
+				}, "首页");
 		// 得到fragment的个数
 		int count = fragmentArray.length;
 

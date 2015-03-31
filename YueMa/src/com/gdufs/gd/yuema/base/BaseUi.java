@@ -55,8 +55,9 @@ public class BaseUi extends ActionBarActivity {
 	}
 
 	// 设置自定义的actionBar
-	protected void setCustomerActionBar(LayoutInflater layoutInflater,
-			OnClickListener settingListener, String titleString) {
+	protected void setCustomerActionBarWithSetting(
+			LayoutInflater layoutInflater, OnClickListener settingListener,
+			String titleString) {
 		View actionBarView = layoutInflater.inflate(
 				R.layout.actionbar_port_layout, null);
 		setting = (ImageView) actionBarView.findViewById(R.id.Setting);
@@ -66,6 +67,22 @@ public class BaseUi extends ActionBarActivity {
 		actionBar.setCustomView(actionBarView);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		actionBar.setDisplayShowCustomEnabled(true);
+	}
+
+	// 设置自定义的actionBar
+	protected void setCustomerActionBarNoSetting(LayoutInflater layoutInflater,
+			OnClickListener settingListener, String titleString) {
+		View actionBarView = layoutInflater.inflate(
+				R.layout.actionbar_port_layout, null);
+		setting = (ImageView) actionBarView.findViewById(R.id.Setting);
+		setting.setVisibility(View.GONE);
+		title = (TextView) actionBarView.findViewById(R.id.title);
+		title.setText(titleString);
+		actionBar.setCustomView(actionBarView);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setHomeButtonEnabled(true);
 	}
 
 	@Override
@@ -335,5 +352,4 @@ public class BaseUi extends ActionBarActivity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
-
 }
