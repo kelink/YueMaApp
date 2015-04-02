@@ -31,6 +31,8 @@ public class BaseService extends Service {
 	}
 
 	// 异步网络任务
+
+	// 完成任务后的回调方法，需要override
 	public void doTaskAsync(final int taskId, final String taskUrl) {
 
 	}
@@ -40,7 +42,6 @@ public class BaseService extends Service {
 
 	}
 
-	// 完成任务后的回调方法，需要override
 	public void onTaskComplete(int taskId, BaseMessage message) {
 
 	}

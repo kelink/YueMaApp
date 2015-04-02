@@ -12,6 +12,12 @@ import android.widget.TextView;
 
 import com.gdufs.yuema.R;
 
+/**
+ * 基本的加载对话框
+ * 
+ * @author Administrator
+ * 
+ */
 public class BaseLoadingDialog {
 	private Dialog dialog;
 	private Context context;

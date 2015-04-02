@@ -1,22 +1,16 @@
 package com.gdufs.gd.yuema.dao;
 
 import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.gdufs.gd.yuema.base.BaseSqlite;
 import com.gdufs.gd.yuema.constant.DBConstants;
 import com.gdufs.gd.yuema.model.Contact;
-import com.gdufs.gd.yuema.util.SqliteUtils;
 
 public class ContactDao extends BaseSqlite {
-	private SqliteUtils sqliteUtil;
 
-	public ContactDao(SqliteUtils sqliteUtil) {
-		this.sqliteUtil = sqliteUtil;
-		init();
-	}
-
-	private void init() {
-		this.db = sqliteUtil.getDb();
+	public ContactDao(SQLiteDatabase db) {
+		this.db = db;
 	}
 
 	@Override

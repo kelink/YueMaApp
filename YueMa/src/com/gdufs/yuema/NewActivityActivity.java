@@ -13,6 +13,12 @@ import android.widget.Toast;
 import com.gdufs.gd.yuema.base.BaseUi;
 import com.gdufs.gd.yuema.util.DateTimePickDialogUtil;
 
+/**
+ * 活动发布界面
+ * 
+ * @author Administrator
+ * 
+ */
 public class NewActivityActivity extends BaseUi {
 	private Spinner labels;
 	private ArrayAdapter<CharSequence> labelsAdapter = null;
@@ -59,9 +65,10 @@ public class NewActivityActivity extends BaseUi {
 		endDateTime.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
-//				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
-//						NewActivityActivity.this, initEndDateTime);
-//				dateTimePicKDialog.dateTimePicKDialog(endDateTime);
+				// DateTimePickDialogUtil dateTimePicKDialog = new
+				// DateTimePickDialogUtil(
+				// NewActivityActivity.this, initEndDateTime);
+				// dateTimePicKDialog.dateTimePicKDialog(endDateTime);
 			}
 		});
 	}
@@ -86,6 +93,5 @@ public class NewActivityActivity extends BaseUi {
 		}
 
 	}
-	// 时间选择器
 
 }

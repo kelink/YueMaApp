@@ -102,8 +102,8 @@ public class HomePageActivity extends BaseUi {
 
 	// 定义数组来存放Fragment界面
 	private Class<?> fragmentArray[] = { HomePageFragment.class,
-			HomePageFragment_FriendList.class, HomePageFragment_Msg.class,
-			HomepageFragment_User.class, HomePageFragment_Send.class };
+			HomePageFragment_FriendList.class, HomePageFragment_Send.class,
+			HomePageFragment_Msg.class, HomepageFragment_User.class };
 
 	// 定义数组来存放按钮图片
 	private int mImageViewArray[] = { R.drawable.tab_home_btn,
@@ -131,7 +131,7 @@ public class HomePageActivity extends BaseUi {
 								RelationActivity.class));
 
 					}
-				}, "首页");
+				}, PAGE_HOME);
 		// 得到fragment的个数
 		int count = fragmentArray.length;
 

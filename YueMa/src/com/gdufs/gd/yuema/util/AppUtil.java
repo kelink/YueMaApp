@@ -134,27 +134,6 @@ public class AppUtil {
 		return null;
 	}
 
-	/* 获取 Message */
-	// static public BaseMessage getMessage(String jsonStr) {
-	// BaseMessage message = new BaseMessage();
-	// JSONObject jsonObject = null;
-	// try {
-	// jsonObject = new JSONObject(jsonStr);
-	// if (jsonObject != null) {
-	// message.setData(jsonObject.getString("data"));
-	// message.setInfo(jsonObject.getString("info"));
-	// message.setStatus(jsonObject.getString("status"));
-	// }
-	// } catch (JSONException e) {
-	// // throw new Exception("Json format error");
-	// Log.e("AppUtil-->getMessage", "Json format error");
-	// e.printStackTrace();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// return message;
-	// }
-
 	/* Model 数组转化成 Map 列表 */
 	static public List<? extends Map<String, ?>> dataToList(
 			List<? extends BaseModel> data, String[] fields) {

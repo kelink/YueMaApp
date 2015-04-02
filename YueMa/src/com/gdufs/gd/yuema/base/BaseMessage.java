@@ -11,6 +11,12 @@ import org.json.JSONObject;
 
 import com.gdufs.gd.yuema.util.AppUtil;
 
+/**
+ * 定义传输的json的格式字段
+ * 
+ * @author Administrator
+ * 
+ */
 public class BaseMessage {
 
 	private String code;
@@ -84,7 +90,6 @@ public class BaseMessage {
 	}
 
 	// 解析json数据格式，返回结果
-	@SuppressWarnings("unchecked")
 	public void setResult(String result) throws Exception {
 		this.resultSrc = result;
 		if (result.length() > 0) {
@@ -122,7 +127,6 @@ public class BaseMessage {
 	}
 
 	// json数据转化为对应定义的BaseModel对象
-	@SuppressWarnings("unchecked")
 	private BaseModel json2model(String modelClassName,
 			JSONObject modelJsonObject) throws Exception {
 		// auto-load model class
