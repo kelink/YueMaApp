@@ -47,10 +47,6 @@
         android:label="@string/app_name"
         android:name="com.gdufs.yuema.application.MainApplication"
         android:theme="@style/AppTheme" >
-        <!-- 百度api -->
-        <meta-data  
-        android:name="com.baidu.lbsapi.API_KEY"  
-        android:value="WT5K4P0sgB2twKFMKVsvcLC3" />
         <!-- 接入JPush -->
         <!-- Required -->
         <service
@@ -113,7 +109,8 @@
         <!-- Required. AppKey copied from Portal -->
         <meta-data android:name="JPUSH_APPKEY" android:value="c7a05a50dbffe5ce22fd9730"/>      
         <!-- 接入JPush 结束-->
-        
+        <!-- 百度api -->
+        <meta-data  android:name="com.baidu.lbsapi.API_KEY"  android:value="WT5K4P0sgB2twKFMKVsvcLC3" />
         
         <!-- 应用配置 -->
        
@@ -150,6 +147,13 @@
             android:theme="@style/MyAppTheme.Light.FullScreen.Light" 
             android:label="@string/app_name">      
        </activity>
+       <!-- 用户协议界面 -->
+       <activity
+            android:name="com.gdufs.yuema.AggrementActivity"
+            android:theme="@style/CustomActionBarTheme" 
+            android:label="@string/app_name">      
+       </activity>
+       
        <!-- 注册界面1 phoneNum -->
        <activity
             android:name="com.gdufs.yuema.RegistPhoneActivity"
@@ -201,6 +205,9 @@
             android:theme="@style/ActivityTheme_Light"
             >
        </activity>
+       
+        <!-- 自定义service -->
+        <!-- 自定义receiver -->
     </application>
     
     

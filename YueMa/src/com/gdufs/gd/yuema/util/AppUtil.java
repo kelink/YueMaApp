@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.lang.reflect.Field;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -31,28 +29,6 @@ import android.util.Log;
 import com.gdufs.gd.yuema.base.BaseModel;
 
 public class AppUtil {
-
-	/* md5 加密 */
-	static public String md5(String str) {
-		MessageDigest algorithm = null;
-		try {
-			algorithm = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		if (algorithm != null) {
-			algorithm.reset();
-			algorithm.update(str.getBytes());
-			byte[] bytes = algorithm.digest();
-			StringBuilder hexString = new StringBuilder();
-			for (byte b : bytes) {
-				hexString.append(Integer.toHexString(0xFF & b));
-			}
-			return hexString.toString();
-		}
-		return "";
-
-	}
 
 	/* 首字母大写 */
 	static public String ucfirst(String str) {

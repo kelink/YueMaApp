@@ -13,45 +13,52 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:text="@string/setpwd_information" />
-
+ 		
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-     	android:layout_marginTop="10dp"
-       	android:layout_marginBottom="10dp"
-       	android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:orientation="horizontal"
-        android:background="@color/white" >
-
+        android:layout_marginTop="10dp"
+        android:gravity="right|center"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+	
         <EditText
-            android:id="@+id/code_editText"
+            android:id="@+id/editText_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="0.87"
             android:background="@drawable/bg_edittext"
-            android:ems="13"
+            android:ems="6"
             android:hint="@string/code"
             android:inputType="numberDecimal"
             android:padding="10dip"
             android:singleLine="true"
             android:textColorHint="#AAAAAA"
             android:textSize="15sp" >
-
             <requestFocus />
         </EditText>
 
-        <Button
-            android:id="@+id/getcode_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-       		android:layout_marginBottom="5dp"
-            android:background="@color/red"
-            android:text="@string/getcode"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
+        	<Button
+        	    android:id="@+id/btn_getCode"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="34dp"
+        	    android:layout_gravity="right"
+        	    android:layout_marginBottom="3dp"
+        	    android:layout_marginLeft="5dp"
+        	    android:layout_marginRight="5dp"
+        	    android:layout_marginTop="3dp"
+        	    android:background="@color/red"
+        	    android:text="@string/getcode"
+        	    android:textColor="@color/white"
+        	    android:textSize="12sp" />
+       
     </LinearLayout>
+
  	 <EditText
-            android:id="@+id/pwd_editText"
+            android:id="@+id/editText_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edittext"
@@ -69,7 +76,7 @@
             <requestFocus />
         </EditText>
         <EditText
-            android:id="@+id/name_editText"
+            android:id="@+id/editText_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edittext"
@@ -87,9 +94,9 @@
             <requestFocus />
         </EditText>
         <Button
-	        android:id="@+id/finish_btn"
+	        android:id="@+id/btn_finish"
 	        android:layout_width="match_parent"
-	        android:layout_height="30dp"
+	        android:layout_height="wrap_content"
 	        android:background="@color/red"
 	        android:text="@string/finish_text"
 	       	android:layout_marginTop="10dp"

@@ -40,29 +40,26 @@ import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.gdufs.gd.yuema.util.AppUtil;
 import com.gdufs.gd.yuema.util.NetWorkUtils;
 import com.gdufs.gd.yuema.util.JPush.JPushSettingUtil;
+import com.gdufs.gd.yuema.util.volley.NormalPostRequest;
 import com.gdufs.gd.yuema.util.volley.RequestManager;
 import com.gdufs.yuema.R;
 
 public class BaseUi extends ActionBarActivity {
-	private long exitTime = 0;// 标志退出时间
-	protected boolean showLoadBar = false;
-	protected boolean showDebugMsg = true;
-	protected Context context;
+	private long exitTime = 0;// 退出时间
+
 	protected ActionBar actionBar;
 	protected ImageView setting;
 	protected TextView title;
-	protected RequestQueue requestQueue = RequestManager.getInstance(context)
-			.getRequestQueue();
+	protected RequestQueue requestQueue;
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		context = getApplicationContext();
 		actionBar = getSupportActionBar();
+		requestQueue = RequestManager.getInstance(this).getRequestQueue();
+		initView();
 		initJPush();
 	}
 
@@ -88,7 +85,7 @@ public class BaseUi extends ActionBarActivity {
 			LayoutInflater layoutInflater, OnClickListener settingListener,
 			String titleString) {
 		View actionBarView = layoutInflater.inflate(
-				R.layout.actionbar_port_layout, null);
+				R.layout.actionbar_port_layout_setting, null);
 		setting = (ImageView) actionBarView.findViewById(R.id.Setting);
 		setting.setOnClickListener(settingListener);
 		title = (TextView) actionBarView.findViewById(R.id.title);
@@ -99,19 +96,18 @@ public class BaseUi extends ActionBarActivity {
 	}
 
 	// 设置自定义的actionBar带返回键
-	protected void setCustomerActionBarNoSetting(LayoutInflater layoutInflater,
-			OnClickListener settingListener, String titleString) {
+	protected void setCustomerActionBarWithBack(LayoutInflater layoutInflater,
+			OnClickListener listener, String titleString) {
 		View actionBarView = layoutInflater.inflate(
-				R.layout.actionbar_port_layout, null);
-		setting = (ImageView) actionBarView.findViewById(R.id.Setting);
-		setting.setVisibility(View.GONE);
+				R.layout.actionbar_port_layout_back, null);
+		final ImageView back = (ImageView) actionBarView
+				.findViewById(R.id.actionbar_back);
+		back.setOnClickListener(listener);
 		title = (TextView) actionBarView.findViewById(R.id.title);
 		title.setText(titleString);
 		actionBar.setCustomView(actionBarView);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		actionBar.setDisplayShowCustomEnabled(true);
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setHomeButtonEnabled(true);
 	}
 
 	@Override
@@ -119,7 +115,6 @@ public class BaseUi extends ActionBarActivity {
 		super.onResume();
 		// 便于JPush 统计
 		JPushInterface.onResume(this);
-		debugMemory("onResume");
 	}
 
 	@Override
@@ -127,21 +122,17 @@ public class BaseUi extends ActionBarActivity {
 		super.onPause();
 		// 便于JPush 统计
 		JPushInterface.onPause(this);
-		debugMemory("onPause");
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		// debug memory
-		debugMemory("onStart");
+
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		// debug memory
-		debugMemory("onStop");
 		// 取消当前队列中的所有request
 		requestQueue.cancelAll(new RequestQueue.RequestFilter() {
 			@Override
@@ -154,10 +145,6 @@ public class BaseUi extends ActionBarActivity {
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////
 	// util method
-
-	public void toast(String msg) {
-		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-	}
 
 	/**
 	 * 不结束当前活动 activity间的切换
@@ -319,21 +306,36 @@ public class BaseUi extends ActionBarActivity {
 		return getLayout(layoutId).findViewById(itemId);
 	}
 
-	// //////////////////////////////////////////////////////////////////////////////////////////////
-	// 逻辑实现的方法
-
 	public void doFinish() {
 		this.finish();
 	}
 
 	/**
-	 * 自定义request
-	 * 
-	 * @param request
+	 * 默认的回退按钮的操作
 	 */
-	public void addRequestQueue(Request<?> request) {
-		requestQueue.add(request);
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// if (keyCode == KeyEvent.KEYCODE_BACK
+		// && event.getAction() == KeyEvent.ACTION_DOWN) {
+		// if ((System.currentTimeMillis() - exitTime) > 3000) {
+		// Toast.makeText(getApplicationContext(), "再按一次退出程序",
+		// Toast.LENGTH_SHORT).show();
+		// exitTime = System.currentTimeMillis();
+		// } else {
+		// finish();
+		// System.exit(0);
+		// }
+		// return true;
+		// }
+		return super.onKeyDown(keyCode, event);
 	}
+
+	public void toast(String msg) {
+		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+	}
+
+	// //////////////////////////////////////////////////////////////////////////////////////////////
+	// 逻辑实现的方法
 
 	/**
 	 * 当前线程Handler发送消息
@@ -389,26 +391,6 @@ public class BaseUi extends ActionBarActivity {
 	}
 
 	/**
-	 * 默认的回退按钮的操作
-	 */
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK
-				&& event.getAction() == KeyEvent.ACTION_DOWN) {
-			if ((System.currentTimeMillis() - exitTime) > 3000) {
-				Toast.makeText(getApplicationContext(), "再按一次退出程序",
-						Toast.LENGTH_SHORT).show();
-				exitTime = System.currentTimeMillis();
-			} else {
-				finish();
-				System.exit(0);
-			}
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-
-	/**
 	 * 获取网络类型
 	 * 
 	 * @param context
@@ -429,6 +411,15 @@ public class BaseUi extends ActionBarActivity {
 	}
 
 	/**
+	 * 自定义request
+	 * 
+	 * @param request
+	 */
+	public void addRequestQueue(Request<?> request) {
+		requestQueue.add(request);
+	}
+
+	/**
 	 * 请求网络服务 无参数时候默认为GET，有参数为POST 不需要复写
 	 * 
 	 * @param url
@@ -438,15 +429,17 @@ public class BaseUi extends ActionBarActivity {
 	@SuppressWarnings("deprecation")
 	public void doRequest(final int taskId, String url,
 			final HashMap<String, String> parmas, int requestType) {
-		if (!isConnectedNetWork(context)) {
+		if (!isConnectedNetWork(this)) {
 			onNetworkError(C.NetWorkMsg.NETWORK_DISCONNECTED);
 			return;
 		}
 		if (url != null) {
-			Request<?> request = null;
 			switch (requestType) {
+			/**
+			 * 1.客户端以普通的post方式进行提交,(null时使用GET）服务端返回"字符串"
+			 */
 			case C.RequestType.STRING:
-				request = new StringRequest(url,
+				StringRequest stringRequest = new StringRequest(url,
 						new Response.Listener<String>() {
 
 							@Override
@@ -466,13 +459,17 @@ public class BaseUi extends ActionBarActivity {
 						return parmas;
 					}
 				};
-
+				// 添加到请求的线程池中去
+				onPreRequest(taskId);
+				requestQueue.add(stringRequest);
 				break;
-			// 请求json 对象
+			/**
+			 * 2.客户端以json串的post请求方式进行提交,服务端返回"json串"
+			 */
 			case C.RequestType.JSONOBJ:
 
-				request = new JsonObjectRequest(url, null,
-						new Response.Listener<JSONObject>() {
+				JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+						url, null, new Response.Listener<JSONObject>() {
 							@Override
 							public void onResponse(JSONObject response) {
 								onRequestComplete(response, taskId);
@@ -483,17 +480,20 @@ public class BaseUi extends ActionBarActivity {
 								onRequestFail(error, taskId);
 							}
 						}) {
-					// Post时候传入参数
+					// Post时候传入参数，传入的参数必须为JSON 串
 					@Override
 					protected Map<String, String> getParams()
 							throws AuthFailureError {
 						return parmas;
 					}
 				};
+				// 添加到请求的线程池中去
+				onPreRequest(taskId);
+				requestQueue.add(jsonObjectRequest);
 				break;
 			// 请求json 数组
 			case C.RequestType.JSONARRAY:
-				request = new JsonArrayRequest(url,
+				JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
 						new Response.Listener<JSONArray>() {
 
 							@Override
@@ -513,9 +513,12 @@ public class BaseUi extends ActionBarActivity {
 						return parmas;
 					}
 				};
+				// 添加到请求的线程池中去
+				onPreRequest(taskId);
+				requestQueue.add(jsonArrayRequest);
 				break;
 			case C.RequestType.IMAGE:
-				request = new ImageRequest(url,
+				ImageRequest imageRequest = new ImageRequest(url,
 						new Response.Listener<Bitmap>() {
 
 							@Override
@@ -529,15 +532,36 @@ public class BaseUi extends ActionBarActivity {
 								onRequestFail(error, taskId);
 							}
 						});
+				// 添加到请求的线程池中去
+				onPreRequest(taskId);
+				requestQueue.add(imageRequest);
+				break;
+			/**
+			 * 客户端以普通的post方式进行提交,服务端返回json串
+			 */
+			case C.RequestType.NORMAL:
+				NormalPostRequest normalPostRequest = new NormalPostRequest(
+						url, new Response.Listener<JSONObject>() {
+							@Override
+							public void onResponse(JSONObject response) {
+								onRequestComplete(response, taskId);
+							}
+						}, new Response.ErrorListener() {
+							@Override
+							public void onErrorResponse(VolleyError error) {
+								onRequestFail(error, taskId);
+							}
+						}, parmas);
+
+				onPreRequest(taskId);
+				requestQueue.add(normalPostRequest);
 				break;
 			default:
 				break;
 			}
-			// 添加到请求的线程池中去
-			onPreRequest(taskId);
-			requestQueue.add(request);
+
 		} else {
-			onInvalidRequest(C.NetWorkMsg.INVALID_REQUEST);
+			onInvalidRequest(C.NetWorkMsg.REQUEST_FAIL);
 		}
 	}
 
@@ -552,7 +576,7 @@ public class BaseUi extends ActionBarActivity {
 	}
 
 	public void onRequestFail(Object error, int taskId) {
-		toast(C.NetWorkMsg.INVALID_REQUEST);
+		toast(C.NetWorkMsg.REQUEST_FAIL);
 		return;
 	}
 
@@ -567,14 +591,6 @@ public class BaseUi extends ActionBarActivity {
 	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////
-	// debug method
-
-	public void debugMemory(String tag) {
-		if (this.showDebugMsg) {
-			Log.w(this.getClass().getSimpleName(),
-					tag + ":" + AppUtil.getUsedMemory());
-		}
-	}
 
 	/**************************************************
 	 * JPUSH 回调Tags和Alias 使用Handler的作用是防止网络不连接的时候设置alias和tag不成功

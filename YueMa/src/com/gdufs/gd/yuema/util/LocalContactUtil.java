@@ -6,12 +6,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
+import android.util.Pair;
 
 /**
  * 本地联系人工具类
@@ -25,14 +25,13 @@ public class LocalContactUtil {
 	private static final int PHONES_DISPLAY_NAME_INDEX = 0;
 	private static final int PHONES_NUMBER_INDEX = 1;
 
-	private static Set<ContentValues> contactList = null;
+	private static Set<Pair<String, String>> contactList = null;
 
-	public static Set<ContentValues> getLocalcontactList(Context context) {
+	public static Set<Pair<String, String>> getLocalcontactList(Context context) {
 		if (contactList == null) {
 			synchronized (LocalContactUtil.class) {
 				if (contactList == null) {
-					// 处理获取contactList
-					contactList = new HashSet<ContentValues>();
+					contactList = new HashSet<Pair<String, String>>();
 					getPhoneContacts(context);
 					getSIMContacts(context);
 				}
@@ -54,8 +53,10 @@ public class LocalContactUtil {
 				String contactName = phoneCursor
 						.getString(PHONES_DISPLAY_NAME_INDEX);
 				if (isMobileNum(phoneNumber)) {
-					ContentValues item = new ContentValues();
-					item.put(phoneNumber, contactName);
+					// ContentValues item = new ContentValues();
+					// item.put(phoneNumber, contactName);
+					Pair<String, String> item = new Pair<>(phoneNumber,
+							contactName);
 					contactList.add(item);
 				}
 
@@ -78,8 +79,8 @@ public class LocalContactUtil {
 				String contactName = phoneCursor
 						.getString(PHONES_DISPLAY_NAME_INDEX);
 				if (isMobileNum(phoneNumber)) {
-					ContentValues item = new ContentValues();
-					item.put(phoneNumber, contactName);
+					Pair<String, String> item = new Pair<>(phoneNumber,
+							contactName);
 					contactList.add(item);
 				}
 			}

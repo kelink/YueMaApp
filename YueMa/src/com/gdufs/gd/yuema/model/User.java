@@ -1,12 +1,14 @@
 package com.gdufs.gd.yuema.model;
 
+import java.io.Serializable;
+
 /**
  * User 单例对象
  * 
  * @author Administrator
  * 
  */
-public class User {
+public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public final static String COL_NICKNAME = "nickName";
 	public final static String COL_PHONENUM = "phoneNum";
@@ -44,6 +46,10 @@ public class User {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setLogin(boolean isLogin) {

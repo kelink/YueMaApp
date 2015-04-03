@@ -1,10 +1,15 @@
 package com.gdufs.yuema.application;
 
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.app.Application;
 import android.graphics.Bitmap.CompressFormat;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
 
+import com.gdufs.gd.yuema.util.SharePreferencesUtil;
 import com.gdufs.gd.yuema.util.volley.ImageCacheManager;
 import com.gdufs.gd.yuema.util.volley.ImageCacheManager.CacheType;
 import com.gdufs.gd.yuema.util.volley.RequestManager;
@@ -23,6 +28,12 @@ public class MainApplication extends Application {
 	private static CompressFormat DISK_IMAGECACHE_COMPRESS_FORMAT = CompressFormat.PNG;
 	private static int DISK_IMAGECACHE_QUALITY = 100;
 
+	private static MainApplication _instance;
+
+	public static MainApplication getInstance() {
+		return _instance;
+	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -30,7 +41,9 @@ public class MainApplication extends Application {
 	}
 
 	private void init() {
-		RequestManager.getInstance(this);// 初始化网络请求管理器
+		_instance = this;
+		RequestManager
+				.getInstance(MainApplication.this.getApplicationContext());// 初始化网络请求管理器
 		createImageCache();// 初始化缓存管理器
 		initJPush();
 	}
@@ -52,6 +65,60 @@ public class MainApplication extends Application {
 		Log.d(TAG, "[JPushApplication] onCreate");
 		JPushInterface.setDebugMode(true);
 		JPushInterface.init(this);
+	}
+
+	// ////////////////////////////////////////////
+	/* 保存sessionId 和cookies */
+	// /////////////////////////////////////
+	private static final String SET_COOKIE_KEY = "Set-Cookie";
+	private static final String COOKIE_KEY = "Cookie";
+	private static final String SESSION_COOKIE = "sessionid";
+
+	/**
+	 * 从头部获取session cookies 并保存到SharePreferences
+	 * 
+	 * @param headers
+	 *            Response Headers.
+	 */
+	public final void checkSessionCookie(Map<String, String> headers) {
+
+		// 解析cookies
+		String mHeader = headers.toString();
+		// 使用正则表达式从reponse的头中提取cookie内容的子串
+		Pattern pattern = Pattern.compile("Set-Cookie.*?;");
+		Matcher m = pattern.matcher(mHeader);
+		String cookieFromResponse = "";
+		if (m.find()) {
+			cookieFromResponse = m.group();
+			// 去掉cookie末尾的分号
+			cookieFromResponse = cookieFromResponse.substring(11,
+					cookieFromResponse.length() - 1);
+			SharePreferencesUtil.putString(this, SESSION_COOKIE,
+					cookieFromResponse);
+			Log.i("LOG", "cookie from server " + cookieFromResponse);
+		}
+	}
+
+	/**
+	 * 如果session cookies存在的话 添加 到头部，
+	 * 
+	 * @param headers
+	 */
+	public final void addSessionCookie(Map<String, String> headers) {
+		String sessionId = SharePreferencesUtil.getString(this, SESSION_COOKIE,
+				"");
+		if (sessionId.length() > 0) {
+			StringBuilder builder = new StringBuilder();
+			builder.append(SESSION_COOKIE);
+			builder.append("=");
+			builder.append(sessionId);
+			if (headers.containsKey(COOKIE_KEY)) {
+				builder.append("; ");
+				builder.append(headers.get(COOKIE_KEY));
+			}
+			headers.put(COOKIE_KEY, builder.toString());
+			Log.i("add cookies COOKIE_KEY---------->>>", COOKIE_KEY);
+		}
 	}
 
 }

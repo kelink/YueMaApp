@@ -7,13 +7,18 @@ import android.widget.Button;
 
 import com.gdufs.gd.yuema.base.BaseUi;
 
+/**
+ * 登录注册同时页面，在应用第一次进入的时候使用
+ * 
+ * @author Administrator
+ * 
+ */
 public class LogonRegistActivity extends BaseUi {
 	private Button registBtn;
 	private Button logonBtn;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_logon_regist);
 		initView();
@@ -36,7 +41,6 @@ public class LogonRegistActivity extends BaseUi {
 	}
 
 	private void initView() {
-		// 设置ActionBar
-		setFullScreenActionBar();
+		setFullScreenActionBar();// 全屏显示
 	}
 }

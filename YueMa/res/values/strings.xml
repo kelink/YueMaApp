@@ -22,6 +22,14 @@
      <string name="activity_friends">圈子动态</string>
      <string name="activity_mine">我的动态</string>
    
+     <!-- titile -->
+     <string name="title_regist">注册</string>
+     <string name="title_logon">登录</string>
+     <string name="title_home">首页</string>
+     <string name="title_relation">人脉</string>
+     <string name="title_friends_msg">圈子动态</string>
+     <string name="title_my_msg">我的动态</string>
+     <string name="title_messgae">消息</string>
      <!-- processDialog -->
      <string name="message">登录中</string>
      
@@ -35,6 +43,8 @@
      <string name="phonedetial">手机号注册，更加有利于您的朋友和你联系哟</string>
      <string name="next_btn_text">下一步</string>
      <string name="aggrement">我同意《YueMa服务协议》</string>
+     <!-- aggrement activity -->
+    <string name="aggrementDetial">我同意《YueMa服务协议》</string>
      
      <!-- activity set pwd -->
      <string name="setpwd_information">请输入验证码，并设定密码和姓名</string>

@@ -1,22 +1,77 @@
 package com.gdufs.yuema;
 
+import java.util.HashMap;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.gdufs.gd.yuema.base.BaseUi;
+import com.gdufs.gd.yuema.base.C;
+import com.gdufs.gd.yuema.model.TransferMessage;
+import com.gdufs.gd.yuema.util.JacksonUtil;
+import com.gdufs.gd.yuema.util.MD5Util;
 
 public class RegistPwdActivity extends BaseUi {
+	private EditText codeEditText;
+	private EditText pwdEditText;
+	private EditText nameEditText;
+	private Button getCodeBtn;
+	private Button finishBtn;
+	private String registPhone;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		registPhone = this.getIntent().getExtras()
+				.getString(C.ParamsName.PHONE_NUM);
 		setContentView(R.layout.activity_regist_pwd);
 		initView();
 	}
 
 	private void initView() {
 		// 设置ActionBar
-		setCustomerActionBarNoSetting(this.getLayoutInflater(), null, "密码设置");
+		setCustomerActionBarWithBack(this.getLayoutInflater(),
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						doFinish();
+					}
+				}, getResources().getString(R.string.title_regist));
+		codeEditText = (EditText) this.findViewById(R.id.editText_code);
+		pwdEditText = (EditText) this.findViewById(R.id.editText_pwd);
+		nameEditText = (EditText) this.findViewById(R.id.editText_name);
+		getCodeBtn = (Button) this.findViewById(R.id.btn_getCode);
+		finishBtn = (Button) this.findViewById(R.id.btn_finish);
+		getCodeBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				doGetRegistCode(registPhone);// 获取验证码
+
+			}
+		});
+		finishBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (codeEditText.getText().toString().trim().equals("")
+						|| pwdEditText.getText().toString().trim().equals("")
+						|| nameEditText.getText().toString().trim().equals("")) {
+					toast(C.ActivityMessage.blankField);
+					return;
+				} else {
+					doRegist(registPhone, codeEditText.getText().toString()
+							.trim(), pwdEditText.getText().toString().trim(),
+							nameEditText.getText().toString().trim());
+				}
+			}
+		});
 	}
 
 	@Override
@@ -32,5 +87,55 @@ public class RegistPwdActivity extends BaseUi {
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	// 获取验证码
+	private void doGetRegistCode(String phoneNum) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put(C.ParamsName.PHONE_NUM, phoneNum);
+		doRequest(C.Task.TASK_GET_REGIST_CODE, C.API.GET_REGIST_CODE, params,
+				C.RequestType.NORMAL);
+		Log.i("API-->", C.API.GET_REGIST_CODE);
+	}
+
+	// 注册
+	private void doRegist(String phoneNum, String code, String pwd, String name) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put(C.ParamsName.PHONE_NUM, phoneNum);
+		params.put(C.ParamsName.REGIST_CODE, code);
+		params.put(C.ParamsName.PASSWORD, MD5Util.md5Encryption(pwd));
+		params.put(C.ParamsName.USERNAME, name);
+		doRequest(C.Task.TASK_REGIST, C.API.REGIST, params,
+				C.RequestType.NORMAL);
+		Log.i("API-->", C.API.REGIST);
+		Log.i("params->", params.toString());
+	}
+
+	@Override
+	public void onRequestComplete(Object response, int taskId) {
+		TransferMessage msgMessage = null;// 返回对象，每次都从这里拿数据
+		switch (taskId) {
+		case C.Task.TASK_GET_REGIST_CODE:
+			msgMessage = JacksonUtil.readJson2Entity(response.toString(),
+					TransferMessage.class);
+			if (msgMessage != null
+					&& msgMessage.getCode().equals(C.ResponseCode.SUCCESS)) {
+				codeEditText.setText(msgMessage.getResultMap()
+						.get(C.ParamsName.REGIST_CODE).toString());
+			}
+			break;
+		case C.Task.TASK_REGIST:
+			// 解析返回，符合则成功注册
+			msgMessage = JacksonUtil.readJson2Entity(response.toString(),
+					TransferMessage.class);
+			if (msgMessage != null
+					&& msgMessage.getCode().equals(C.ResponseCode.SUCCESS)) {
+				forward(LoginActivity.class);
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 }

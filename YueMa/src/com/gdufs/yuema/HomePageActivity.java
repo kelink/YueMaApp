@@ -13,7 +13,6 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import cn.jpush.android.api.JPushInterface;
-import cn.trinea.android.common.util.ToastUtils;
 
 import com.gdufs.gd.yuema.base.BaseUi;
 import com.gdufs.gd.yuema.baseview.HomePageFragment;
@@ -151,7 +150,6 @@ public class HomePageActivity extends BaseUi {
 
 			@Override
 			public void onTabChanged(String tabId) {
-				ToastUtils.show(HomePageActivity.this, tabId);
 				switch (tabId) {
 				case PAGE_HOME:
 					mTitle = PAGE_HOME;

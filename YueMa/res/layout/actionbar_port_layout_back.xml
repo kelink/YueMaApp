@@ -5,21 +5,22 @@
     android:orientation="horizontal" 
     android:background="@color/red">
  <ImageView
-        android:id="@+id/Setting"
+        android:id="@+id/actionbar_back"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-         android:gravity="center"
-        android:src="@drawable/actionbar_leftsize" />
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/actionbar_backaarow" />
 
  <TextView
      android:id="@+id/title"
      android:layout_width="match_parent"
     android:layout_height="match_parent"
      android:ems="10"
-     android:layout_marginLeft="-45dp"
+     android:layout_marginLeft="-10dp"
      android:gravity="center"
      android:textColor="@color/white"
-     android:textSize="15sp"
+     android:textSize="20sp"
      android:text="人脉" >
  </TextView>
 
