@@ -9,6 +9,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.gdufs.gd.yuema.util.SharePreferencesUtil;
 import com.gdufs.gd.yuema.util.volley.ImageCacheManager;
 import com.gdufs.gd.yuema.util.volley.ImageCacheManager.CacheType;
@@ -46,6 +47,7 @@ public class MainApplication extends Application {
 				.getInstance(MainApplication.this.getApplicationContext());// 初始化网络请求管理器
 		createImageCache();// 初始化缓存管理器
 		initJPush();
+		initBaiDuMap();
 	}
 
 	/**
@@ -67,12 +69,17 @@ public class MainApplication extends Application {
 		JPushInterface.init(this);
 	}
 
+	/**
+	 * 初始化百度地图
+	 */
+	private void initBaiDuMap() {
+		// 在使用 SDK 各组间之前初始化 context 信息，传入 ApplicationContext
+		SDKInitializer.initialize(this);
+	}
+
 	// ////////////////////////////////////////////
 	/* 保存sessionId 和cookies */
 	// /////////////////////////////////////
-	private static final String SET_COOKIE_KEY = "Set-Cookie";
-	private static final String COOKIE_KEY = "Cookie";
-	private static final String SESSION_COOKIE = "sessionid";
 
 	/**
 	 * 从头部获取session cookies 并保存到SharePreferences
@@ -81,7 +88,6 @@ public class MainApplication extends Application {
 	 *            Response Headers.
 	 */
 	public final void checkSessionCookie(Map<String, String> headers) {
-
 		// 解析cookies
 		String mHeader = headers.toString();
 		// 使用正则表达式从reponse的头中提取cookie内容的子串
@@ -93,9 +99,8 @@ public class MainApplication extends Application {
 			// 去掉cookie末尾的分号
 			cookieFromResponse = cookieFromResponse.substring(11,
 					cookieFromResponse.length() - 1);
-			SharePreferencesUtil.putString(this, SESSION_COOKIE,
-					cookieFromResponse);
-			Log.i("LOG", "cookie from server " + cookieFromResponse);
+			SharePreferencesUtil.putString(this, "Cookie", cookieFromResponse);
+			Log.i("cookie from server", cookieFromResponse);
 		}
 	}
 
@@ -105,19 +110,11 @@ public class MainApplication extends Application {
 	 * @param headers
 	 */
 	public final void addSessionCookie(Map<String, String> headers) {
-		String sessionId = SharePreferencesUtil.getString(this, SESSION_COOKIE,
-				"");
-		if (sessionId.length() > 0) {
-			StringBuilder builder = new StringBuilder();
-			builder.append(SESSION_COOKIE);
-			builder.append("=");
-			builder.append(sessionId);
-			if (headers.containsKey(COOKIE_KEY)) {
-				builder.append("; ");
-				builder.append(headers.get(COOKIE_KEY));
-			}
-			headers.put(COOKIE_KEY, builder.toString());
-			Log.i("add cookies COOKIE_KEY---------->>>", COOKIE_KEY);
+		String sessionId = SharePreferencesUtil.getString(this, "Cookie", "");
+		if (sessionId.equals("")) {
+			return;
+		} else {
+			headers.put("Cookie", sessionId);
 		}
 	}
 

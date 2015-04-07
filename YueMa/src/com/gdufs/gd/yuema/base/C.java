@@ -22,10 +22,13 @@ public class C {
 		// 注册
 		public static final String REGIST = Server.HOST_STRING
 				+ "/user/register";
-		// 修改用户信息
-		public static final String CHANGE_USER_PROFILE = "";
+		// 用户是否存在
+		public static final String ISOK_REGIST = Server.HOST_STRING
+				+ "/user/isUserExist";
 		// 通讯录上传接口
-		public static final String UPLOAD_CONTACT = Server.HOST_STRING + "/";
+		public static final String UPLOAD_CONTACT = Server.HOST_STRING
+				+ "/contact/addContact";
+
 	}
 
 	// 请求参数的同一名称
@@ -41,11 +44,14 @@ public class C {
 
 	// 网络请求的类型
 	public class RequestType {
-		public static final int STRING = 0;
-		public static final int JSONOBJ = 1;
-		public static final int JSONARRAY = 2;
-		public static final int IMAGE = 3;
-		public static final int NORMAL = 4;// 自定义适应SpringMVC的请求
+		/**
+		 * 暂时不支持其他，使用POST 同一协议定义
+		 */
+		// public static final int STRING = 0;
+		// public static final int JSONOBJ = 1;
+		// public static final int JSONARRAY = 2;
+		// public static final int IMAGE = 3;
+		public static final int POST = 4;// 自定义适应SpringMVC的请求
 
 	}
 
@@ -53,7 +59,7 @@ public class C {
 		public static final String NETWORK_EXCEPTION = "网络异常";
 		public static final String NETWORK_DISCONNECTED = "无法连接网络";
 		public static final String SERVER_EXCEPTION = "服务器内部错误";
-		public static final String PARSER_EXCEPTION = "服务器解析错误";
+		public static final String INVALID_REQUEST = "服务器解析错误";
 		public static final String REQUEST_FAIL = "请求失败";
 	}
 
@@ -62,6 +68,7 @@ public class C {
 		public static final String LOADING = "加载中...";
 		public static final String LOGON_EXCEPTION = "登陆异常";
 		public static final String WRONG_PROFILE = "账户或密码错误";
+		public static final String REGIST_NOW = "注册中...";
 	}
 
 	public class JPushConstant {
@@ -76,10 +83,12 @@ public class C {
 
 	public class Task {
 		public static final int TASK_REGIST = 3000;// 注册
-		public static final int TASK_GET_REGIST_CODE = 3001;// 获取验证码
-		public static final int TASK_LOGON = 3002;// 登录
-		public static final int TASK_SET_PWD = 3003;// 设置密码
-		public static final int TASK_UPLOAD_CONTACT = 3004;// 上传通讯录
+		public static final int TASK_ISOK_REGIST = 3001;// 上传通讯录
+		public static final int TASK_GET_REGIST_CODE = 3002;// 获取验证码
+		public static final int TASK_LOGON = 3003;// 登录
+		public static final int TASK_SET_PWD = 3004;// 设置密码
+		public static final int TASK_UPLOAD_CONTACT = 3005;// 上传通讯录
+
 	}
 
 	public class ServiceAction {

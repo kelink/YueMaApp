@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/editText_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="13"
+                android:hint="@string/title"
+                android:inputType="numberDecimal"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColorHint="#AAAAAA"
+                android:textSize="15sp" />
+
+            <GridView
+                android:id="@+id/noScrollgridview"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_marginLeft="5dp"
+                android:horizontalSpacing="3dp"
+                android:numColumns="4"
+                android:scrollbars="none"
+                android:verticalSpacing="5dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/editText_beginTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1.12"
+                    android:background="@drawable/bg_edittext"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:hint="@string/begin_time"
+                    android:inputType="numberDecimal"
+                    android:padding="10dip"
+                    android:singleLine="true"
+                    android:textColorHint="#AAAAAA"
+                    android:textSize="15sp" >
+                </EditText>
+
+                <EditText
+                    android:id="@+id/editText_endTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:hint="@string/end_time"
+                    android:inputType="numberDecimal"
+                    android:padding="10dip"
+                    android:singleLine="true"
+                    android:textColorHint="#AAAAAA"
+                    android:textSize="15sp" >
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <Spinner
+                    android:id="@+id/spinner_province"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/spinner_city"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/spinner_district"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editText_activity_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center"
+                android:hint="活动地址"
+                android:inputType="text"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColorHint="#AAAAAA"
+                android:textSize="15sp" >
+            </EditText>
+
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/new_activity_geocoder_bmapView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true" />
+
+            <EditText
+                android:id="@+id/editText_activity_detial"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center"
+                android:hint="活动详情"
+                android:inputType="numberDecimal"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColorHint="#AAAAAA"
+                android:textSize="15sp" >
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/editText_cost"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1.12"
+                    android:background="@drawable/bg_edittext"
+                    android:gravity="center"
+                    android:hint="预期花费"
+                    android:inputType="numberDecimal"
+                    android:padding="10dip"
+                    android:singleLine="true"
+                    android:textColorHint="#AAAAAA"
+                    android:textSize="15sp" >
+                </EditText>
+
+                <EditText
+                    android:id="@+id/editText_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_edittext"
+                    android:gravity="center"
+                    android:hint="最多人数"
+                    android:inputType="numberDecimal"
+                    android:padding="10dip"
+                    android:singleLine="true"
+                    android:textColorHint="#AAAAAA"
+                    android:textSize="15sp" >
+                </EditText>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/editText_activity_cost_num_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center"
+                android:hint="联系方式"
+                android:inputType="numberDecimal"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColorHint="#AAAAAA"
+                android:textSize="15sp" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editText_activity_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center"
+                android:hint="活动类别"
+                android:inputType="numberDecimal"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColorHint="#AAAAAA"
+                android:textSize="15sp" >
+            </EditText>
+
+            <EditText
+                android:id="@+id/editText_activity_benifit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center"
+                android:hint="活动好处"
+                android:inputType="numberDecimal"
+                android:padding="10dip"
+                android:singleLine="true"
+                android:textColorHint="#AAAAAA"
+                android:textSize="15sp" >
+            </EditText>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

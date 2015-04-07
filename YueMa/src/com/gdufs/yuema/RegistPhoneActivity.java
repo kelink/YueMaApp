@@ -1,5 +1,7 @@
 package com.gdufs.yuema;
 
+import java.util.HashMap;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,9 @@ public class RegistPhoneActivity extends BaseUi {
 	private CheckBox checkBox_aggre;
 	private TextView aggrementDetial;
 
+	// data
+	private String phoneNum;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,7 +44,7 @@ public class RegistPhoneActivity extends BaseUi {
 
 			@Override
 			public void onClick(View v) {
-				String phoneNum = phoneEditText.getText().toString().trim();
+				phoneNum = phoneEditText.getText().toString().trim();
 				if (phoneNum.length() <= 0) {
 					toast(C.ActivityMessage.blankField);
 					return;
@@ -49,9 +54,11 @@ public class RegistPhoneActivity extends BaseUi {
 						return;
 					}
 					if (volidPhoneNum(phoneNum)) {
-						Bundle bundle = new Bundle();
-						bundle.putString(C.ParamsName.PHONE_NUM, phoneNum);
-						forward(RegistPwdActivity.class, bundle);
+						// 判断注册
+						HashMap<String, String> parmas = new HashMap<>();
+						parmas.put(C.ParamsName.PHONE_NUM, phoneNum);
+						doRequest(C.Task.TASK_ISOK_REGIST, C.API.ISOK_REGIST,
+								parmas, C.RequestType.POST);
 					} else {
 						toast(C.ActivityMessage.invalidPhone);
 						return;
@@ -93,6 +100,7 @@ public class RegistPhoneActivity extends BaseUi {
 		return super.onOptionsItemSelected(item);
 	}
 
+	// 判断是否存在
 	// 判断是否符合格式
 	private boolean volidPhoneNum(String phoneNum) {
 		return LocalContactUtil.isMobileNum(phoneNum);
@@ -105,6 +113,13 @@ public class RegistPhoneActivity extends BaseUi {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public void onRequestComplete(Object response, int taskId) {
+		Bundle bundle = new Bundle();
+		bundle.putString(C.ParamsName.PHONE_NUM, phoneNum);
+		forward(RegistPwdActivity.class, bundle);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.gdufs.gd.yuema.util;
+package com.gdufs.gd.yuema.baseview;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,7 +18,7 @@ import com.gdufs.yuema.R;
 /**
  * 日期时间选择控件
  */
-public class DateTimePickDialogUtil implements OnDateChangedListener,
+public class DateTimePickDialog implements OnDateChangedListener,
 		OnTimeChangedListener {
 	private DatePicker datePicker;
 	private TimePicker timePicker;
@@ -35,7 +35,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 	 * @param initDateTime
 	 *            初始日期时间值，作为弹出窗口的标题和日期时间初始值
 	 */
-	public DateTimePickDialogUtil(Activity activity, String initDateTime) {
+	public DateTimePickDialog(Activity activity, String initDateTime) {
 		this.activity = activity;
 		this.initDateTime = initDateTime;
 
@@ -44,7 +44,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 	public void init(DatePicker datePicker, TimePicker timePicker) {
 		Calendar calendar = Calendar.getInstance();
 		if (!(null == initDateTime || "".equals(initDateTime))) {
-			calendar = this.getCalendarByInintData(initDateTime);
+			calendar = this.getCalendarByStr(initDateTime);
 		} else {
 			initDateTime = calendar.get(Calendar.YEAR) + "年"
 					+ calendar.get(Calendar.MONTH) + "月"
@@ -67,7 +67,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 	 *            :为需要设置的日期时间文本编辑框
 	 * @return
 	 */
-	public AlertDialog dateTimePicKDialog(final EditText inputDate) {
+	public AlertDialog showDateTimePicKDialog(final EditText inputDate) {
 		LinearLayout dateTimeLayout = (LinearLayout) activity
 				.getLayoutInflater().inflate(R.layout.common_datetime, null);
 		datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
@@ -119,12 +119,12 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 	 *            初始日期时间值 字符串型
 	 * @return Calendar
 	 */
-	private Calendar getCalendarByInintData(String initDateTime) {
+	private Calendar getCalendarByStr(String dateTimeStr) {
 		Calendar calendar = Calendar.getInstance();
 
 		// 将初始日期时间2012年07月02日 16:45 拆分成年 月 日 时 分 秒
-		String date = spliteString(initDateTime, "日", "index", "front"); // 日期
-		String time = spliteString(initDateTime, "日", "index", "back"); // 时间
+		String date = spliteString(dateTimeStr, "日", "index", "front"); // 日期
+		String time = spliteString(dateTimeStr, "日", "index", "back"); // 时间
 
 		String yearStr = spliteString(date, "年", "index", "front"); // 年份
 		String monthAndDay = spliteString(date, "年", "index", "back"); // 月日
@@ -157,7 +157,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 	 * @param frontOrBack
 	 * @return
 	 */
-	public static String spliteString(String srcStr, String pattern,
+	private static String spliteString(String srcStr, String pattern,
 			String indexOrLast, String frontOrBack) {
 		String result = "";
 		int loc = -1;
@@ -176,4 +176,16 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 		return result;
 	}
 
+	/**
+	 * 比较大小: 1表示大于 0表现是等于 -1表示小于
+	 * 
+	 * @param dateTimeStr1
+	 * @param dateTimeStr2
+	 * @return
+	 */
+	public int compare(String dateTimeStr1, String dateTimeStr2) {
+		Calendar calendar1 = getCalendarByStr(dateTimeStr1);
+		Calendar calendar2 = getCalendarByStr(dateTimeStr2);
+		return calendar1.compareTo(calendar2);
+	}
 }

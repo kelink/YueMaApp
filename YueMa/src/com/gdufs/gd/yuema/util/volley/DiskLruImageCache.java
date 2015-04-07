@@ -19,8 +19,7 @@ import com.gdufs.yuema.BuildConfig;
 import com.jakewharton.disklrucache.DiskLruCache;
 
 /**
- * 磁盘图片缓存器，依赖于DiskLruCache 包
- * debug模式下，自动清理缓存
+ * 磁盘图片缓存器，依赖于DiskLruCache 包 debug模式下，自动清理缓存
  * 
  * @author Administrator
  * 

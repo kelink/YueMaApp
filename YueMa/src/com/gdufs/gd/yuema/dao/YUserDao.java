@@ -7,7 +7,10 @@ import com.gdufs.gd.yuema.model.User;
 
 public interface YUserDao {
 	public int add(User user);
+
 	public int delete(int id);
+
 	public ArrayList<HashMap<String, String>> query();
+
 	public int update();
 }

@@ -23,13 +23,13 @@ public class VolleyUploadUtil {
 	private Context context;
 	private int requestMethod;
 	private String url;
-	private Listener<String> responseListener;
+	private Listener responseListener;
 	private ErrorListener errorListener;
 	private Map<String, File> files;
 	private Map<String, String> params;
 
 	public VolleyUploadUtil(Context context, int requestMethod, String url,
-			Listener<String> responseListener, ErrorListener errorListener,
+			Listener responseListener, ErrorListener errorListener,
 			Map<String, File> files, Map<String, String> params) {
 		this.context = context;
 		this.requestMethod = requestMethod;
@@ -61,5 +61,4 @@ public class VolleyUploadUtil {
 		};
 		mSingleQueue.add(multiPartRequest);
 	}
-	//
 }

@@ -2,17 +2,13 @@ package com.gdufs.gd.yuema.base;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -31,15 +27,12 @@ import cn.jpush.android.api.CustomPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
+import com.gdufs.gd.yuema.model.TransferMessage;
+import com.gdufs.gd.yuema.util.JacksonUtil;
 import com.gdufs.gd.yuema.util.NetWorkUtils;
 import com.gdufs.gd.yuema.util.JPush.JPushSettingUtil;
 import com.gdufs.gd.yuema.util.volley.NormalPostRequest;
@@ -428,7 +421,7 @@ public class BaseUi extends ActionBarActivity {
 	 */
 	@SuppressWarnings("deprecation")
 	public void doRequest(final int taskId, String url,
-			final HashMap<String, String> parmas, int requestType) {
+			final HashMap<String, String> params, int requestType) {
 		if (!isConnectedNetWork(this)) {
 			onNetworkError(C.NetWorkMsg.NETWORK_DISCONNECTED);
 			return;
@@ -436,122 +429,31 @@ public class BaseUi extends ActionBarActivity {
 		if (url != null) {
 			switch (requestType) {
 			/**
-			 * 1.客户端以普通的post方式进行提交,(null时使用GET）服务端返回"字符串"
-			 */
-			case C.RequestType.STRING:
-				StringRequest stringRequest = new StringRequest(url,
-						new Response.Listener<String>() {
-
-							@Override
-							public void onResponse(String response) {
-								Log.i("response--->", response);
-								onRequestComplete(response, taskId);
-							}
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(VolleyError error) {
-								onRequestFail(error, taskId);
-							}
-						}) {
-					@Override
-					protected Map<String, String> getParams()
-							throws AuthFailureError {
-						return parmas;
-					}
-				};
-				// 添加到请求的线程池中去
-				onPreRequest(taskId);
-				requestQueue.add(stringRequest);
-				break;
-			/**
-			 * 2.客户端以json串的post请求方式进行提交,服务端返回"json串"
-			 */
-			case C.RequestType.JSONOBJ:
-
-				JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-						url, null, new Response.Listener<JSONObject>() {
-							@Override
-							public void onResponse(JSONObject response) {
-								onRequestComplete(response, taskId);
-							}
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(VolleyError error) {
-								onRequestFail(error, taskId);
-							}
-						}) {
-					// Post时候传入参数，传入的参数必须为JSON 串
-					@Override
-					protected Map<String, String> getParams()
-							throws AuthFailureError {
-						return parmas;
-					}
-				};
-				// 添加到请求的线程池中去
-				onPreRequest(taskId);
-				requestQueue.add(jsonObjectRequest);
-				break;
-			// 请求json 数组
-			case C.RequestType.JSONARRAY:
-				JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
-						new Response.Listener<JSONArray>() {
-
-							@Override
-							public void onResponse(JSONArray response) {
-								onRequestComplete(response, taskId);
-							}
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(VolleyError error) {
-								onRequestFail(error, taskId);
-							}
-						}) {
-					// Post时候传入参数,null时使用 Get
-					@Override
-					protected Map<String, String> getParams()
-							throws AuthFailureError {
-						return parmas;
-					}
-				};
-				// 添加到请求的线程池中去
-				onPreRequest(taskId);
-				requestQueue.add(jsonArrayRequest);
-				break;
-			case C.RequestType.IMAGE:
-				ImageRequest imageRequest = new ImageRequest(url,
-						new Response.Listener<Bitmap>() {
-
-							@Override
-							public void onResponse(Bitmap response) {
-								onRequestComplete(response, taskId);
-							}
-						}, 256, 256, Config.RGB_565,
-						new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(VolleyError error) {
-								onRequestFail(error, taskId);
-							}
-						});
-				// 添加到请求的线程池中去
-				onPreRequest(taskId);
-				requestQueue.add(imageRequest);
-				break;
-			/**
 			 * 客户端以普通的post方式进行提交,服务端返回json串
 			 */
-			case C.RequestType.NORMAL:
+			case C.RequestType.POST:
 				NormalPostRequest normalPostRequest = new NormalPostRequest(
 						url, new Response.Listener<JSONObject>() {
 							@Override
 							public void onResponse(JSONObject response) {
-								onRequestComplete(response, taskId);
+								Log.i("response--->>", response.toString());
+								TransferMessage msgMessage = JacksonUtil
+										.readJson2Entity(response.toString(),
+												TransferMessage.class);
+								if (msgMessage != null
+										&& msgMessage.getCode().equals(
+												C.ResponseCode.SUCCESS)) {
+									onRequestComplete(msgMessage, taskId);
+								} else {
+									onRequestFail(msgMessage, taskId);
+								}
 							}
 						}, new Response.ErrorListener() {
 							@Override
 							public void onErrorResponse(VolleyError error) {
 								onRequestFail(error, taskId);
 							}
-						}, parmas);
+						}, params);
 
 				onPreRequest(taskId);
 				requestQueue.add(normalPostRequest);
@@ -576,12 +478,17 @@ public class BaseUi extends ActionBarActivity {
 	}
 
 	public void onRequestFail(Object error, int taskId) {
-		toast(C.NetWorkMsg.REQUEST_FAIL);
+		try {
+			TransferMessage msgMessage = (TransferMessage) error;
+			toast(msgMessage.getMessage());
+		} catch (Exception e) {
+			toast(C.NetWorkMsg.REQUEST_FAIL);
+		}
 		return;
 	}
 
 	public void onInvalidRequest(String msg) {
-		toast(C.NetWorkMsg.REQUEST_FAIL);
+		toast(C.NetWorkMsg.INVALID_REQUEST);
 		return;
 	}
 

@@ -30,14 +30,10 @@ public class NormalPostRequest extends Request<JSONObject> {
 	private Map<String, String> mMap;
 	private Listener<JSONObject> mListener;
 
-	// 设计cookies
-	// public String cookieFromResponse;
-	// private String mHeader;
-	// private Map<String, String> sendHeader = new HashMap<String, String>(1);
-
 	public NormalPostRequest(String url, Listener<JSONObject> listener,
 			ErrorListener errorListener, Map<String, String> map) {
 		super(Request.Method.POST, url, errorListener);
+
 		mListener = listener;
 		mMap = map;
 	}
@@ -52,20 +48,12 @@ public class NormalPostRequest extends Request<JSONObject> {
 	@Override
 	protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
 		try {
-
 			String jsonString = new String(response.data,
 					HttpHeaderParser.parseCharset(response.headers));
-
-			// 保存sessionid cookies到SharePreferences
+			// check cookies
 			MainApplication.getInstance().checkSessionCookie(response.headers);
-			JSONObject jsonObject = new JSONObject(jsonString);
-			// jsonObject.put("cookie", cookieFromResponse);
-			Log.i("jsonObject-----------------------", "jsonObject "
-					+ jsonObject.toString());
-
-			return Response.success(jsonObject,
+			return Response.success(new JSONObject(jsonString),
 					HttpHeaderParser.parseCacheHeaders(response));
-
 		} catch (UnsupportedEncodingException e) {
 			return Response.error(new ParseError(e));
 		} catch (JSONException je) {
@@ -80,13 +68,12 @@ public class NormalPostRequest extends Request<JSONObject> {
 
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError {
-		// 设置sessionId cookie到头部
 		Map<String, String> headers = super.getHeaders();
 		if (headers == null || headers.isEmpty()) {
-			headers = new HashMap<String, String>();
+			headers = new HashMap<>();
 		}
 		MainApplication.getInstance().addSessionCookie(headers);
-		Log.i("header -----------》》》", headers.toString());
+		Log.i("headers---------->>", headers.toString());
 		return headers;
 	}
 }

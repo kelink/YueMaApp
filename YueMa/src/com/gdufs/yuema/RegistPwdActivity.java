@@ -11,10 +11,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.gdufs.gd.yuema.base.BaseLoadingDialog;
 import com.gdufs.gd.yuema.base.BaseUi;
 import com.gdufs.gd.yuema.base.C;
 import com.gdufs.gd.yuema.model.TransferMessage;
-import com.gdufs.gd.yuema.util.JacksonUtil;
 import com.gdufs.gd.yuema.util.MD5Util;
 
 public class RegistPwdActivity extends BaseUi {
@@ -24,6 +24,7 @@ public class RegistPwdActivity extends BaseUi {
 	private Button getCodeBtn;
 	private Button finishBtn;
 	private String registPhone;
+	private BaseLoadingDialog loadingDialog;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -94,8 +95,9 @@ public class RegistPwdActivity extends BaseUi {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put(C.ParamsName.PHONE_NUM, phoneNum);
 		doRequest(C.Task.TASK_GET_REGIST_CODE, C.API.GET_REGIST_CODE, params,
-				C.RequestType.NORMAL);
+				C.RequestType.POST);
 		Log.i("API-->", C.API.GET_REGIST_CODE);
+		Log.i("params->", params.toString());
 	}
 
 	// 注册
@@ -105,33 +107,40 @@ public class RegistPwdActivity extends BaseUi {
 		params.put(C.ParamsName.REGIST_CODE, code);
 		params.put(C.ParamsName.PASSWORD, MD5Util.md5Encryption(pwd));
 		params.put(C.ParamsName.USERNAME, name);
-		doRequest(C.Task.TASK_REGIST, C.API.REGIST, params,
-				C.RequestType.NORMAL);
+		doRequest(C.Task.TASK_REGIST, C.API.REGIST, params, C.RequestType.POST);
 		Log.i("API-->", C.API.REGIST);
 		Log.i("params->", params.toString());
 	}
 
 	@Override
-	public void onRequestComplete(Object response, int taskId) {
-		TransferMessage msgMessage = null;// 返回对象，每次都从这里拿数据
+	public void onPreRequest(int taskId) {
 		switch (taskId) {
 		case C.Task.TASK_GET_REGIST_CODE:
-			msgMessage = JacksonUtil.readJson2Entity(response.toString(),
-					TransferMessage.class);
-			if (msgMessage != null
-					&& msgMessage.getCode().equals(C.ResponseCode.SUCCESS)) {
-				codeEditText.setText(msgMessage.getResultMap()
-						.get(C.ParamsName.REGIST_CODE).toString());
-			}
 			break;
 		case C.Task.TASK_REGIST:
+			loadingDialog = new BaseLoadingDialog(this,
+					C.ActivityMsg.REGIST_NOW);
+			loadingDialog.show();
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public void onRequestComplete(Object response, int taskId) {
+		switch (taskId) {
+		case C.Task.TASK_GET_REGIST_CODE:
+			TransferMessage msgMessage = (TransferMessage) response;
+			codeEditText.setText(msgMessage.getResultMap()
+					.get(C.ParamsName.REGIST_CODE).toString());
+			break;
+
+		case C.Task.TASK_REGIST:
 			// 解析返回，符合则成功注册
-			msgMessage = JacksonUtil.readJson2Entity(response.toString(),
-					TransferMessage.class);
-			if (msgMessage != null
-					&& msgMessage.getCode().equals(C.ResponseCode.SUCCESS)) {
-				forward(LoginActivity.class);
-			}
+			loadingDialog.dismiss();
+			toast("注册成功，请登录");
+			forward(LoginActivity.class);
 			break;
 
 		default:

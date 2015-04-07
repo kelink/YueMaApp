@@ -1,8 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"  
+    android:background="@drawable/bg_transparent" >
 
-    
+    <LinearLayout
+        android:id="@+id/ll_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+        
+        android:orientation="vertical" >
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue" />
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="173dp"
+           android:gravity="center"
+           android:orientation="vertical" >
+     
+       <com.gdufs.gd.yuema.baseview.RoundImageView
+            android:id="@+id/id_qiqiu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/activity" >
+        </com.gdufs.gd.yuema.baseview.RoundImageView>
+        
+ 		 <TextView
+               android:id="@+id/textView1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="X" />
+        </LinearLayout>
+
+      </LinearLayout> 
+
+
+</RelativeLayout>

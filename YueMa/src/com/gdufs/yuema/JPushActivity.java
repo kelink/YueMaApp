@@ -13,6 +13,7 @@ import com.gdufs.yuema.R;
 
 public class JPushActivity extends ActionBarActivity {
 	public static boolean isForeground = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,6 +21,7 @@ public class JPushActivity extends ActionBarActivity {
 		initJPush();
 		registerMessageReceiver(); // used for receive msg
 	}
+
 	@Override
 	protected void onResume() {
 		isForeground = true;
@@ -37,10 +39,12 @@ public class JPushActivity extends ActionBarActivity {
 		unregisterReceiver(mMessageReceiver);// 取消注册
 		super.onDestroy();
 	}
+
 	// 初始化 JPush。如果已经初始化，但没有登录成功，则执行重新登录。
 	private void initJPush() {
 		JPushInterface.init(getApplicationContext());
 	}
+
 	// for receive customer msg from jpush server
 	private MessageReceiver mMessageReceiver;
 	public static final String MESSAGE_RECEIVED_ACTION = "com.gdufs.gd.yuema.MESSAGE_RECEIVED_ACTION";

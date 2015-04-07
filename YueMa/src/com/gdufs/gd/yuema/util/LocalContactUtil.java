@@ -53,8 +53,6 @@ public class LocalContactUtil {
 				String contactName = phoneCursor
 						.getString(PHONES_DISPLAY_NAME_INDEX);
 				if (isMobileNum(phoneNumber)) {
-					// ContentValues item = new ContentValues();
-					// item.put(phoneNumber, contactName);
 					Pair<String, String> item = new Pair<>(phoneNumber,
 							contactName);
 					contactList.add(item);

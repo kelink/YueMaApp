@@ -16,6 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.beginTransaction();
 		try {
+
 			db.execSQL(DBConstants.CREATE_CONTACTS_TABLE_SQL.toString());
 			db.setTransactionSuccessful();
 		} finally {

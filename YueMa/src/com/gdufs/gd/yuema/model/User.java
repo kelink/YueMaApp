@@ -52,12 +52,12 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public void setLogin(boolean isLogin) {
-		User.isLogin = isLogin;
+	public static boolean isLogin() {
+		return isLogin;
 	}
 
-	public boolean getLogin() {
-		return isLogin;
+	public static void setLogin(boolean isLogin) {
+		User.isLogin = isLogin;
 	}
 
 	public static final User getInstance() {
