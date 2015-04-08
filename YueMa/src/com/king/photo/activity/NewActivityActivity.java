@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -43,10 +44,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request.Method;
-import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.baidu.location.BDLocation;
@@ -70,12 +71,14 @@ import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
+import com.gdufs.gd.yuema.base.BaseLoadingDialog;
 import com.gdufs.gd.yuema.base.BaseUi;
 import com.gdufs.gd.yuema.baseview.DateTimePickDialog;
 import com.gdufs.gd.yuema.model.CityListItem;
 import com.gdufs.gd.yuema.util.DBManager;
 import com.gdufs.gd.yuema.util.volley.VolleyUploadUtil;
 import com.gdufs.yuema.R;
+import com.gdufs.yuema.RelationActivity;
 import com.gdufs.yuema.adapter.CityAdapter;
 import com.king.photo.util.Bimp;
 import com.king.photo.util.FileUtils;
@@ -92,7 +95,14 @@ import com.king.photo.util.Res;
 
 public class NewActivityActivity extends BaseUi implements
 		OnGetGeoCoderResultListener {
-
+	// actionBar
+	private View actionBarView;
+	private TextView textview_new_activity_title;
+	private ImageView imageview_new_activity_back;
+	private ImageView imageview_new_activity_ok;
+	// 加载对话框
+	private BaseLoadingDialog loadingDialog;
+	// 界面
 	private GridView noScrollgridview;
 	private GridAdapter adapter;
 	private View parentView;
@@ -148,13 +158,47 @@ public class NewActivityActivity extends BaseUi implements
 		bimap = BitmapFactory.decodeResource(getResources(),
 				R.drawable.icon_addpic_unfocused);
 		PublicWay.activityList.add(this);
-		parentView = getLayoutInflater().inflate(R.layout.activity_selectimg,
-				null);
-		setContentView(parentView);
+
 		Init();
 	}
 
 	public void Init() {
+
+		parentView = getLayoutInflater().inflate(R.layout.activity_selectimg,
+				null);
+		setContentView(parentView);
+		// 设置actionBar
+		actionBarView = getLayoutInflater().inflate(
+				R.layout.actionbar_newactivity, new LinearLayout(this), false);// 使用new
+		// LinearLayout
+		// 解决不能填满的问题
+
+		imageview_new_activity_back = (ImageView) actionBarView
+				.findViewById(R.id.imageview_new_activity_back);
+		textview_new_activity_title = (TextView) actionBarView
+				.findViewById(R.id.textview_new_activity_title);
+		imageview_new_activity_ok = (ImageView) actionBarView
+				.findViewById(R.id.imageview_new_activity_ok);
+		imageview_new_activity_back.setOnClickListener(new OnClickListener() {
+			// 回退
+			@Override
+			public void onClick(View v) {
+				forward(RelationActivity.class);
+			}
+		});
+		imageview_new_activity_ok.setOnClickListener(new OnClickListener() {
+			// 发布按钮
+			@Override
+			public void onClick(View v) {
+				loadingDialog = new BaseLoadingDialog(getContext(), "发布中...");
+				loadingDialog.show();
+				upload();
+			}
+		});
+		actionBar.setCustomView(actionBarView);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+		actionBar.setDisplayShowCustomEnabled(true);
+		// 百度地图初始化
 		mMapView = (MapView) findViewById(R.id.new_activity_geocoder_bmapView);
 		mMapView.showZoomControls(false);// 不要放大放小
 		mBaiduMap = mMapView.getMap();
@@ -302,30 +346,34 @@ public class NewActivityActivity extends BaseUi implements
 		});
 
 	}
+
 	/**
-	 * 图文上传	
+	 * 图文上传
 	 */
-	public void upload(){
+	public void upload() {
 		Map<String, File> files = new HashMap<>();
 		Map<String, String> contents = new HashMap<>();
 		for (ImageItem item : Bimp.tempSelectBitmap) {
 			files.put(item.getImagePath(), new File(item.getImagePath()));
 		}
-		VolleyUploadUtil aUploadUtil=new VolleyUploadUtil(getContext(), Method.POST, "http://192.168.191.1:8080/gd/file/upload2",
-				new Listener() {
+		VolleyUploadUtil.uploadFiles(
+				"http://192.168.202.65:8080/gd/file/upload2", files, contents,
+				new Listener<String>() {
+
 					@Override
-					public void onResponse(Object arg0) {
+					public void onResponse(String arg0) {
 						toast("success");
+
 					}
-				}, new Response.ErrorListener() {
+				}, new ErrorListener() {
 
 					@Override
 					public void onErrorResponse(VolleyError arg0) {
 						toast("error");
-					}
 
-				}, files, contents);
-		aUploadUtil.uploadFiles();
+					}
+				}, "test", getContext());
+
 	}
 
 	@SuppressLint("HandlerLeak")

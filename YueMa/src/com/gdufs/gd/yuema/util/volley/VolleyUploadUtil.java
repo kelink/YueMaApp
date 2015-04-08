@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.Map;
 
 import android.content.Context;
-import android.util.Log;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -20,42 +20,33 @@ import com.android.volley.toolbox.Volley;
  * 
  */
 public class VolleyUploadUtil {
+	private static RequestQueue mSingleQueue;
 
-	private Context context;
-	private int requestMethod;
-	private String url;
-	private Listener responseListener;
-	private ErrorListener errorListener;
-	private Map<String, File> files;
-	private Map<String, String> params;
-
-	public VolleyUploadUtil(Context context, int requestMethod, String url,
-			Listener responseListener, ErrorListener errorListener,
-			Map<String, File> files, Map<String, String> params) {
-		this.context = context;
-		this.requestMethod = requestMethod;
-		this.url = url;
-		this.responseListener = responseListener;
-		this.errorListener = errorListener;
-		this.files = files;
-		this.params = params;
+	public static RequestQueue getmSingleQueue() {
+		return mSingleQueue;
 	}
 
-	public void uploadFiles() {
-		RequestQueue mSingleQueue = Volley.newRequestQueue(context,
-				new MultiPartStack());
+	public static void uploadFiles(final String url,
+			final Map<String, File> files, final Map<String, String> params,
+			final Listener<String> responseListener,
+			final ErrorListener errorListener, final Object tag, Context context) {
+		if (mSingleQueue == null) {
+			mSingleQueue = Volley
+					.newRequestQueue(context, new MultiPartStack());
+		}
+		if (null == url || null == responseListener) {
+			return;
+		}
 		MultiPartStringRequest multiPartRequest = new MultiPartStringRequest(
-				requestMethod, url, responseListener, errorListener) {
+				Request.Method.POST, url, responseListener, errorListener) {
 
 			@Override
 			public Map<String, File> getFileUploads() {
-				// 需要上传的文件
 				return files;
 			}
 
 			@Override
 			public Map<String, String> getStringUploads() {
-				// 需要上传的字符串
 				return params;
 			}
 

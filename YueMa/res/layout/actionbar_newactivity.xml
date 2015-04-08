@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:orientation="horizontal" 
+    android:background="@color/red">
+ 	<ImageView
+        android:id="@+id/imageview_new_activity_back"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:src="@drawable/actionbar_backaarow" />
+
+ 	<TextView
+      	android:id="@+id/textview_new_activity_title"
+     	android:layout_width="0dp"
+     	android:layout_weight="8"
+     	android:layout_height="match_parent"
+     	android:ems="10"
+     	android:gravity="center"
+     	android:textColor="@color/white"
+     	android:textSize="20sp"
+     	android:text="发布活动" >
+ 	</TextView>
+ <ImageView
+        android:id="@+id/imageview_new_activity_ok"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginRight="10dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/check_mark" />
+</LinearLayout>

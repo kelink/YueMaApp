@@ -82,7 +82,7 @@ public class HomePageActivity extends BaseUi {
 		// 实例化布局对象
 		layoutInflater = LayoutInflater.from(this);
 		// 设置actionBar
-		actionBarView = layoutInflater.inflate(R.layout.actionbar_homepage,
+		actionBarView = layoutInflater.inflate(R.layout.actionbar_newactivity,
 				new LinearLayout(this), false);// 使用new LinearLayout 解决不能填满的问题
 		settingImageView = (ImageView) actionBarView
 				.findViewById(R.id.imageview_setting);
