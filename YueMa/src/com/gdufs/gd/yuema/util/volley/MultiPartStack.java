@@ -25,6 +25,10 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 
+import android.preference.PreferenceActivity.Header;
+import android.util.Log;
+import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
@@ -45,8 +49,8 @@ public class MultiPartStack extends HurlStack {
 	public HttpResponse performRequest(Request<?> request,
 			Map<String, String> additionalHeaders) throws IOException,
 			AuthFailureError {
-
 		if (!(request instanceof MultiPartRequest)) {
+			Log.i("performRequest-------------------->>>>.",additionalHeaders.toString());
 			return super.performRequest(request, additionalHeaders);
 		} else {
 			return performMultiPartRequest(request, additionalHeaders);
@@ -58,6 +62,7 @@ public class MultiPartStack extends HurlStack {
 		for (String key : headers.keySet()) {
 			httpRequest.setHeader(key, headers.get(key));
 		}
+		
 	}
 
 	public HttpResponse performMultiPartRequest(Request<?> request,
@@ -68,6 +73,9 @@ public class MultiPartStack extends HurlStack {
 		addHeaders(httpRequest, additionalHeaders);
 		addHeaders(httpRequest, request.getHeaders());
 		HttpParams httpParams = httpRequest.getParams();
+		for (org.apache.http.Header header : httpRequest.getAllHeaders()) {
+			Log.i("header------------------->>>>>",header.getName()+":"+header.getValue());
+		}
 		int timeoutMs = request.getTimeoutMs();
 		// TODO: Reevaluate this connection timeout based on more wide-scale
 		// data collection and possibly different for wifi vs. 3G.

@@ -234,27 +234,7 @@ public class NewActivityActivity extends BaseUi implements
 			public void onClick(View v) {
 				pop.dismiss();
 				ll_popup.clearAnimation();
-				Map<String, File> files = new HashMap<>();
-				Map<String, String> contents = new HashMap<>();
-				for (ImageItem item : Bimp.tempSelectBitmap) {
-					toast(item.getImagePath());
-					files.put(item.imageId, new File(item.getImagePath()));
-				}
-				new VolleyUploadUtil(getContext(), Method.POST, "",
-						new Listener() {
-
-							@Override
-							public void onResponse(Object arg0) {
-
-							}
-						}, new Response.ErrorListener() {
-
-							@Override
-							public void onErrorResponse(VolleyError arg0) {
-
-							}
-
-						}, files, contents);
+				upload();
 
 			}
 		});
@@ -321,6 +301,31 @@ public class NewActivityActivity extends BaseUi implements
 			}
 		});
 
+	}
+	/**
+	 * 图文上传	
+	 */
+	public void upload(){
+		Map<String, File> files = new HashMap<>();
+		Map<String, String> contents = new HashMap<>();
+		for (ImageItem item : Bimp.tempSelectBitmap) {
+			files.put(item.getImagePath(), new File(item.getImagePath()));
+		}
+		VolleyUploadUtil aUploadUtil=new VolleyUploadUtil(getContext(), Method.POST, "http://192.168.191.1:8080/gd/file/upload2",
+				new Listener() {
+					@Override
+					public void onResponse(Object arg0) {
+						toast("success");
+					}
+				}, new Response.ErrorListener() {
+
+					@Override
+					public void onErrorResponse(VolleyError arg0) {
+						toast("error");
+					}
+
+				}, files, contents);
+		aUploadUtil.uploadFiles();
 	}
 
 	@SuppressLint("HandlerLeak")

@@ -31,7 +31,7 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-	 <!-- since 1.6.0 -->
+    <!-- since 1.6.0 -->
 
 
     <!-- Optional. Required for location feature -->
@@ -49,10 +49,11 @@
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <!--允许应用读取低级别的系统日志文件 -->
-	<uses-permission android:name="android.permission.READ_LOGS"/>
+    <!-- 允许应用读取低级别的系统日志文件 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <!-- 读取联系人权限 -->
-    <uses-permission android:name="android.permission.READ_CONTACTS" />   
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name="com.gdufs.yuema.application.MainApplication"
         android:allowBackup="true"
@@ -79,13 +80,14 @@
             android:name="cn.jpush.android.service.PushReceiver"
             android:enabled="true" >
             <intent-filter android:priority="1000" >
- <!-- since 1.3.5 -->
+
+                <!-- since 1.3.5 -->
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
- <!-- since 1.3.5 -->
+                <!-- since 1.3.5 -->
                 <category android:name="com.gdufs.yuema" />
- <!-- since 1.3.5 -->
+                <!-- since 1.3.5 -->
             </intent-filter>
- <!-- since 1.3.5 -->
+            <!-- since 1.3.5 -->
             <intent-filter>
                 <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
@@ -154,7 +156,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>
             -->
         </activity>
         <!-- 第一次运行引导界面 -->
@@ -221,7 +223,8 @@
             android:name="com.gdufs.yuema.NewActivityActivity"
             android:label="@string/activity_title"
             android:logo="@drawable/logo1"
-            android:theme="@style/CustomActionBarTheme" >>
+            android:theme="@style/CustomActionBarTheme" >
+>
         </activity>
 
         <!-- 关系测试界面 -->
@@ -289,7 +292,7 @@
             android:name="com.king.photo.activity.GalleryActivity"
             android:theme="@style/CustomActionBarTheme" >
         </activity>
-        
+
         <!-- service -->
         <!-- 百度定位 -->
         <service
